@@ -1,0 +1,66 @@
+@import './base.css';
+
+.container {
+  display: flex;
+  height: 100vh;
+  flex-direction: row;
+}
+
+.row {
+  max-width: 1280px;
+  width: 100%;
+  padding: 0 10px;
+}
+
+.container__form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  background: var(--bg-color);
+  position: relative;
+  overflow: hidden;
+}
+
+.container__form--center {
+  max-width: 500px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+.container__image {
+  flex: 1;
+  display: flex;
+}
+
+.container__image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+
+.title {
+  font-size: 35px;
+  color: var(--font-color);
+  margin-bottom: 40px;
+}
+.title::before {
+  content: '';
+  width: 50px;
+  height: 5px;
+  background: var(--border-color);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.link--emphasis {
+  color: var(--link-color);
+  font-size: 14px;
+  font-weight: 500;
+  font-style: italic;
+  cursor: pointer;
+  text-decoration: underline;
+}
