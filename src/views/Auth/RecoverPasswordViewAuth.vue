@@ -54,7 +54,7 @@ import CommonButton from '@/components/common/CommonButton.vue';
 import CommonInput from '@/components/common/CommonInput.vue';
 import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import useUserService from '@/composables/useUserService';
-import validateFields from '@/composables/validateFields';
+import useValidateFields from '@/composables/useValidateFields';
 import { type AccessCredentials } from '@/ts/interfaces/user';
 import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
@@ -86,7 +86,7 @@ function handleLogin() {
     return;
   }
   
-  if (validateFields({ senha, confirmarSenha })) {
+  if (useValidateFields({ senha, confirmarSenha })) {
     loading.value = false;
     return;
   }

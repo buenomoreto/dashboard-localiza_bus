@@ -113,7 +113,7 @@ import CommonCheckbox from '@/components/common/CommonCheckbox.vue';
 import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import { type Company } from '@/ts/interfaces/company';
 import useCompanyService from '@/composables/useCompanyService';
-import  validateFields from "@/composables/validateFields";
+import  useValidateFields from "@/composables/useValidateFields";
 import { toast } from 'vue3-toastify';
 import { ref } from 'vue'
 import { useRouter } from 'vue-router';
@@ -138,7 +138,7 @@ function handleInput(field: keyof Company, value: string) {
 
 function handleLogin() {
   loading.value = true;
-  if (validateFields(payload)) {
+  if (useValidateFields(payload)) {
     loading.value = false;
     return;
   }
@@ -193,5 +193,10 @@ function handleLogin() {
 }
 .container__form-checkbox span {
   font-size: 13px;
+}
+@media (max-width: 1023px) {
+  .container__form--flex:not(:nth-child(3)) {
+    display: block;
+  }
 }
 </style>

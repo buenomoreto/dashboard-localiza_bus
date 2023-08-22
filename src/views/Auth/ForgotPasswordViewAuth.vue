@@ -47,7 +47,7 @@ import CommonButton from '@/components/common/CommonButton.vue';
 import CommonInput from '@/components/common/CommonInput.vue';
 import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import useUserService from '@/composables/useUserService';
-import validateFields from '@/composables/validateFields';
+import useValidateFields from '@/composables/useValidateFields';
 import { toast } from 'vue3-toastify';
 import { ref } from 'vue';
 
@@ -64,7 +64,7 @@ function handleInput(field: keyof Payload, value: string) {
 
 function handleLogin() {
   loading.value = true;
-  if (validateFields(payload)) {
+  if (useValidateFields(payload)) {
     loading.value = false;
     return;
   }

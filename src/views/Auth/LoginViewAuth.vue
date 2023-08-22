@@ -71,7 +71,7 @@ import CommonInput from '@/components/common/CommonInput.vue';
 import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import { type UserCredentials } from '@/ts/interfaces/user';
 import useUserService from '@/composables/useUserService';
-import validateFields from '@/composables/validateFields';
+import useValidateFields from '@/composables/useValidateFields';
 import { toast } from 'vue3-toastify';
 import { ref } from 'vue'
 
@@ -90,7 +90,7 @@ function handleInput(field: keyof UserCredentials, value: string) {
 function handleLogin() {
   loading.value = true;
 
-  if (validateFields(payload)) {
+  if (useValidateFields(payload)) {
     loading.value = false;
     return;
   }
