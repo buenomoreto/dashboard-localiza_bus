@@ -101,9 +101,7 @@
       </div>
     </template>
     <template #contentImage>
-      <div class="container__image">
-        <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
-      </div>
+      <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
     </template>
   </DefaultAuth>
 </template>

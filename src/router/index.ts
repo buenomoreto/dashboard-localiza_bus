@@ -31,7 +31,7 @@ const router = createRouter({
     },
     {
       path: '/auth-token',
-      name: 'TokenAuth',
+      name: 'AuthToken',
       component: TokenViewAuth
     },
     {
