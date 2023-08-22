@@ -1,5 +1,5 @@
 <template>
-  <DefaultAuth>
+  <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
         <div class="container__logo">
@@ -30,8 +30,8 @@
             </template>
             <template #iconCustom>
               <button class="container__form-btn--visibility" type="button" @click="passwordVisibility()">
-                <img v-if="!visibility" src="@/assets/images/icons/eye-slash.svg"> 
-                <img v-else src="@/assets/images/icons/eye.svg"> 
+                <img v-show="!visibility" src="@/assets/images/icons/eye-slash.svg"> 
+                <img v-show="visibility" src="@/assets/images/icons/eye.svg"> 
               </button>
             </template>
           </CommonInput>
@@ -61,14 +61,14 @@
     <template #contentImage>
       <img src="@/assets/images/bg/bg-login.png" width="1090" alt="" />
     </template>
-  </DefaultAuth>
+  </LayoutAuth>
 </template>
 
 <script setup lang="ts">
 import CommonButton from '@/components/common/CommonButton.vue';
 import CommonCheckbox from '@/components/common/CommonCheckbox.vue';
 import CommonInput from '@/components/common/CommonInput.vue';
-import DefaultAuth from '@/components/default/DefaultAuth.vue';
+import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import { type UserCredentials } from '@/ts/interfaces/user';
 import useUserService from '@/composables/useUserService';
 import validateFields from '@/composables/validateFields';

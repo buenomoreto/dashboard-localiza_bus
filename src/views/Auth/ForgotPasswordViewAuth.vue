@@ -1,10 +1,10 @@
 <template>
-  <DefaultAuth>
+  <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
-        <div class="container__form-logo">
+        <!-- <div class="container__form-logo">
           <img src="@/assets/images/logo.svg" alt="" />
-        </div>
+        </div> -->
         <h1 class="container__form-title title">Esqueceu sua senha?</h1>
         <p class="container__form-text">
           Preencha abaixo seu endereço de e-mail para receber as instruções necessárias e criar uma nova senha.
@@ -26,7 +26,7 @@
               @click-event="handleLogin"
             >
               <template #label>
-                <span>Recuperar senha</span>
+                <span>Enviar email</span>
               </template>
             </CommonButton>
           </div>
@@ -39,13 +39,13 @@
     <template #contentImage>
       <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
     </template>
-  </DefaultAuth>
+  </LayoutAuth>
 </template>
 
 <script setup lang="ts">
 import CommonButton from '@/components/common/CommonButton.vue';
 import CommonInput from '@/components/common/CommonInput.vue';
-import DefaultAuth from '@/components/default/DefaultAuth.vue';
+import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import useUserService from '@/composables/useUserService';
 import validateFields from '@/composables/validateFields';
 import { toast } from 'vue3-toastify';

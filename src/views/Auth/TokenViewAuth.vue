@@ -1,10 +1,10 @@
 <template>
-  <DefaultAuth>
+  <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
-        <div class="container__form-logo">
+        <!-- <div class="container__form-logo">
           <img src="@/assets/images/logo.svg" alt="" />
-        </div>
+        </div> -->
         <h1 class="container__form-title title"> 
           <img src="@/assets/images/icons/code.svg" alt="" />
           Autentique sua conta
@@ -41,13 +41,13 @@
     <template #contentImage>
       <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
     </template>
-  </DefaultAuth>
+  </LayoutAuth>
 </template>
 
 <script setup lang="ts">
 import CommonButton from '@/components/common/CommonButton.vue';
 import CommonInputCode from '@/components/common/CommonInputCode.vue';
-import DefaultAuth from '@/components/default/DefaultAuth.vue';
+import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import useUserService from '@/composables/useUserService';
 import validateFields from '@/composables/validateFields';
 import { toast } from 'vue3-toastify';

@@ -1,5 +1,5 @@
 <template>
-  <DefaultAuth>
+  <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
         <h1 class="container__title title">
@@ -103,14 +103,14 @@
     <template #contentImage>
       <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
     </template>
-  </DefaultAuth>
+  </LayoutAuth>
 </template>
 
 <script setup lang="ts">
 import CommonInput from '@/components/common/CommonInput.vue';
 import CommonButton from '@/components/common/CommonButton.vue';
 import CommonCheckbox from '@/components/common/CommonCheckbox.vue';
-import DefaultAuth from '@/components/default/DefaultAuth.vue';
+import LayoutAuth from '@/components/layout/LayoutAuth.vue';
 import { type Company } from '@/ts/interfaces/company';
 import useCompanyService from '@/composables/useCompanyService';
 import  validateFields from "@/composables/validateFields";
