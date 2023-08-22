@@ -64,3 +64,9 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+@media (max-width: 1024px) {
+  .container__form {
+    overflow: auto;
+  }
+}
