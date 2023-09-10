@@ -1,13 +1,13 @@
 import { defineStore } from 'pinia'
 
 type AuthState = {
-  accessToken: string;
-  refreshToken: string;
-  id: number;
-  type: string;
-};
+  accessToken: string
+  refreshToken: string
+  id: number
+  type: string
+}
 
-export const useAuthStore = defineStore('auth',  {
+export const useAuthStore = defineStore('auth', {
   state: (): AuthState => ({
     accessToken: '',
     refreshToken: '',
@@ -16,21 +16,21 @@ export const useAuthStore = defineStore('auth',  {
   }),
   actions: {
     setTokens(user: AuthState) {
-      Object.assign(this, user);
-      localStorage.setItem('userLogged', JSON.stringify(user));
+      Object.assign(this, user)
+      localStorage.setItem('userLogged', JSON.stringify(user))
     },
     loadTokens() {
-      const user = JSON.parse(localStorage.getItem('userLogged') as string);
+      const user = JSON.parse(localStorage.getItem('userLogged') as string)
       if (user) {
-        Object.assign(this, user);
+        Object.assign(this, user)
       }
     },
     clearTokens() {
-      this.accessToken = '';
-      this.refreshToken = '';
-      this.id = 0;
-      this.type = '';
-      localStorage.removeItem('userLogged');
-    },
-  },
-});
+      this.accessToken = ''
+      this.refreshToken = ''
+      this.id = 0
+      this.type = ''
+      localStorage.removeItem('userLogged')
+    }
+  }
+})

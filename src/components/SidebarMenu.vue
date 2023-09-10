@@ -17,10 +17,14 @@
         <div class="separator" />
 
         <ul class="navigation">
-          <li 
-            v-for="(item, index) in menu" 
-            :key="index" 
-            :class="['navigation__item', { 'has-submenu': item.subItems }, { active: item.path === route.path || ( item.label !== 'Dashboard' && route.path.includes(item.path)) }]"
+          <li
+            v-for="(item, index) in menu"
+            :key="index"
+            :class="[
+              'navigation__item',
+              { 'has-submenu': item.subItems },
+              { active: item.path === route.path || (item.label !== 'Dashboard' && route.path.includes(item.path)) }
+            ]"
           >
             <router-link class="navigation__link" :to="item.path">
               <div>
@@ -34,7 +38,12 @@
               </button>
             </router-link>
             <ul v-if="item.subItems" class="submenu">
-              <li v-for="(subItem, subIndex) in item.subItems" :key="subIndex" :class="{ active: subItem.path === route.path }" class="submenu__item">
+              <li
+                v-for="(subItem, subIndex) in item.subItems"
+                :key="subIndex"
+                :class="{ active: subItem.path === route.path }"
+                class="submenu__item"
+              >
                 <router-link class="submenu__link" :to="subItem.path">
                   <span>
                     {{ subItem.label }}
@@ -60,28 +69,28 @@
 import { ref } from 'vue'
 import { menu } from '@/mock/menu'
 import { useUserStore } from '@/stores/user'
-import { useAuthStore } from '@/stores/auth';
-import { useRoute } from 'vue-router';
-import ProfileSkeleton from "@/components/skeletons/menu/ProfileSkeleton.vue";
+import { useAuthStore } from '@/stores/auth'
+import { useRoute } from 'vue-router'
+import ProfileSkeleton from '@/components/skeletons/menu/ProfileSkeleton.vue'
 import useUserService from '@/composables/useUserService'
 
-const route = useRoute();
-const authStore = useAuthStore();
-const userStore = useUserStore();
-const { signOut } = useUserService();
-const toggle = ref(false);
-const user = ref();
+const route = useRoute()
+const authStore = useAuthStore()
+const userStore = useUserStore()
+const { signOut } = useUserService()
+const toggle = ref(false)
+const user = ref()
 
 function toggleSideBar() {
   toggle.value = !toggle.value
 }
 async function handleSignOut() {
   await signOut(authStore.refreshToken).then(() => {
-    authStore.clearTokens();
+    authStore.clearTokens()
   })
 }
 async function updateValue() {
-  user.value = await userStore.fetchUser();
+  user.value = await userStore.fetchUser()
 }
 updateValue()
 </script>
@@ -247,7 +256,6 @@ updateValue()
     z-index: 20;
     box-shadow: 2px 0px 10px -5px rgba(0, 0, 0, 1);
   }
-
 }
 .active .navigation__link {
   background: rgba(255, 255, 255, 0.2);

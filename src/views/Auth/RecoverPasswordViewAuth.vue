@@ -91,10 +91,10 @@ function handleLogin() {
     .catch(({ response }: any) => {
       loading.value = false
       response.data.message.forEach((e: any) => {
-          toast.error(e.msg, {
+        toast.error(e.msg, {
           position: toast.POSITION.BOTTOM_LEFT
         })
-      });
+      })
     })
 }
 </script>

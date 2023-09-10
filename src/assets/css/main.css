@@ -72,7 +72,7 @@
 }
 
 .loading {
-  background-color: #DDE8EE; 
+  background-color: #dde8ee;
   animation: loading infinite 0.8s ease-in-out alternate;
 }
 

@@ -6,7 +6,7 @@
   </LayoutDashboard>
 </template>
 <script setup lang="ts">
-import LayoutDashboard from '@/components/layout/LayoutDashboard.vue';
+import LayoutDashboard from '@/components/layout/LayoutDashboard.vue'
 // import useDriverService from '@/composables/useDriverService';
 // import { ref } from 'vue';
 // import { io } from 'socket.io-client';
@@ -56,12 +56,10 @@ import LayoutDashboard from '@/components/layout/LayoutDashboard.vue';
 // const socket = io('http://localhost:3000/', {
 //   transports: ['websocket'],
 //   reconnectionDelayMax: 10000,
-//   timeout: 5000,   
-// }); 
+//   timeout: 5000,
+// });
 
 // socket.on('locationUpdated', (data: { id: string; latitude: number; longitude: number }) => {
 //   datateste.value = data;
 // });
-
 </script>
-

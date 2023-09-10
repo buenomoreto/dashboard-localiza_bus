@@ -12,9 +12,9 @@ export default function useUserService() {
   }
 
   const signOut = async (refreshToken: string) => {
-    let response: any;
+    let response: any
     try {
-      response = await api.post('/user/signOut', { refreshToken });
+      response = await api.post('/user/signOut', { refreshToken })
       await router.push({
         name: 'Login',
         path: '/signIn'
@@ -29,7 +29,7 @@ export default function useUserService() {
   }
 
   const refreshToken = async (token: string) => {
-    const response = await api.post('/refreshToken', { token });
+    const response = await api.post('/refreshToken', { token })
     return response
   }
 

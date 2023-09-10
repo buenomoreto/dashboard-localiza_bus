@@ -66,7 +66,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore();
+const authStore = useAuthStore()
 const router = useRouter()
 const { windowSize } = useDevice()
 const { signIn } = useUserService()
@@ -91,7 +91,7 @@ function handleLogin() {
   signIn(payload)
     .then(({ data }) => {
       loading.value = false
-      authStore.setTokens({ accessToken: data.token, refreshToken: data.refreshToken, id: data.id, type: data.type });
+      authStore.setTokens({ accessToken: data.token, refreshToken: data.refreshToken, id: data.id, type: data.type })
       router.push({
         name: 'Home',
         path: '/'
@@ -99,11 +99,11 @@ function handleLogin() {
     })
     .catch(({ response }) => {
       loading.value = false
-        response.data.message.forEach((e: any) => {
-          toast.error(e.msg, {
+      response.data.message.forEach((e: any) => {
+        toast.error(e.msg, {
           position: toast.POSITION.BOTTOM_LEFT
         })
-      });
+      })
     })
 }
 
