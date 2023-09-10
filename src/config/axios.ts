@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const { refreshToken } = useUserService()
 const api: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'https://backend-localiza-bus.vercel.app/api',
   headers: {
     Accept: 'application/json'
   }
