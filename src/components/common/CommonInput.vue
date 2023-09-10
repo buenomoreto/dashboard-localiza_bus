@@ -11,7 +11,7 @@
       :placeholder="placeholder"
       v-model.lazy="value"
       v-mask="regexPattern"
-      v-money="entryType === 'passagem' ? mask : false"
+      v-money="entryType === 'ticket_price' ? mask : false"
     />
     <input
       v-if="!maskEntryTypes.includes(entryType)"
@@ -46,11 +46,11 @@ const mask = {
 }
 const regexPatterns: Record<string, string> = {
   cnpj: '##.###.###/####-##',
-  placa: 'XXX-XXXX/XX',
-  telefone: '(##) #####-####'
+  ticket_price: 'XXX-XXXX/XX',
+  phone_number: '(##) #####-####'
 }
 const regexPattern = ref(regexPatterns[entryType])
-const maskEntryTypes = ['cnpj', 'placa', 'telefone']
+const maskEntryTypes = ['cnpj', 'ticket_price', 'phone_number']
 
 function handleInputChange(event: Event) {
   const inputElement = event.target as HTMLInputElement
