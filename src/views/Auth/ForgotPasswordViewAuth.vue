@@ -10,21 +10,13 @@
           Preencha abaixo seu endereço de e-mail para receber as instruções necessárias e criar uma nova senha.
         </p>
         <form action="">
-          <CommonInput 
-              @change="handleInput" 
-              type="email" 
-              entryType="email" 
-              placeholder="Digite aqui o seu e-mail*"
-            >
+          <CommonInput @change="handleInput" type="email" entryType="email" placeholder="Digite aqui o seu e-mail*">
             <template #icon>
-              <img src="@/assets/images/icons/email.svg" alt="">
+              <img src="@/assets/images/icons/email.svg" alt="" />
             </template>
           </CommonInput>
           <div class="container__form-btn--submit">
-            <CommonButton
-              :loading="loading"
-              @click-event="handleLogin"
-            >
+            <CommonButton :loading="loading" @click-event="handleLogin">
               <template #label>
                 <span>Enviar email</span>
               </template>
@@ -43,45 +35,50 @@
 </template>
 
 <script setup lang="ts">
-import CommonButton from '@/components/common/CommonButton.vue';
-import CommonInput from '@/components/common/CommonInput.vue';
-import LayoutAuth from '@/components/layout/LayoutAuth.vue';
-import useUserService from '@/composables/useUserService';
-import useValidateFields from '@/composables/useValidateFields';
-import { toast } from 'vue3-toastify';
-import { ref } from 'vue';
+import CommonButton from '@/components/common/CommonButton.vue'
+import CommonInput from '@/components/common/CommonInput.vue'
+import LayoutAuth from '@/components/layout/LayoutAuth.vue'
+import useUserService from '@/composables/useUserService'
+import useValidateFields from '@/utils/validateFields'
+import { useDevice } from '@/composables/useDevice'
+import { toast } from 'vue3-toastify'
+import { ref } from 'vue'
 
 type Payload = {
-  email: string;
-};
-const { accountRecovery } = useUserService();
-const loading = ref(false);
-const payload = {email: ''}
+  email: string
+}
+
+const { windowSize } = useDevice()
+const { accountRecovery } = useUserService()
+const loading = ref(false)
+const payload = { email: '' }
 
 function handleInput(field: keyof Payload, value: string) {
-  payload[field] = value;
+  payload[field] = value
 }
 
 function handleLogin() {
-  loading.value = true;
-  if (useValidateFields(payload)) {
-    loading.value = false;
-    return;
+  loading.value = true
+  if (useValidateFields(payload, windowSize.width)) {
+    loading.value = false
+    return
   }
-  
+
   accountRecovery(payload)
     .then((response: any) => {
-      loading.value = false;
+      loading.value = false
       toast.success(response.message, {
-        position: toast.POSITION.BOTTOM_LEFT,
-      });
+        position: toast.POSITION.BOTTOM_LEFT
+      })
     })
     .catch(({ response }: any) => {
-      loading.value = false;
-      toast.error(response.data.message, {
-        position: toast.POSITION.BOTTOM_LEFT,
+      loading.value = false
+      response.data.message.forEach((e: any) => {
+          toast.error(e.msg, {
+          position: toast.POSITION.BOTTOM_LEFT
+        })
       });
-    });
+    })
 }
 </script>
 <style scoped>
@@ -89,7 +86,6 @@ function handleLogin() {
   font-size: 16px;
   color: #fff;
   margin-bottom: 35px;
-  
 }
 .container__form-title {
   margin-bottom: 10px;

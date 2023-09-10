@@ -5,7 +5,7 @@
         <!-- <div class="container__form-logo">
           <img src="@/assets/images/logo.svg" alt="" />
         </div> -->
-        <h1 class="container__form-title title"> 
+        <h1 class="container__form-title title">
           <img src="@/assets/images/icons/code.svg" alt="" />
           Autentique sua conta
         </h1>
@@ -13,20 +13,13 @@
           Por favor, confirme sua conta digitando o código de autorização enviado para o seu e-mail.
         </p>
         <form action="">
-           <CommonInputCode
-              @change-code="handleInput" 
-              type="text" 
-              placeholder="*"
-            >
+          <CommonInputCode @change-code="handleInput" type="text" placeholder="*">
             <template #icon>
-              <img src="@/assets/images/icons/email.svg" alt="">
+              <img src="@/assets/images/icons/email.svg" alt="" />
             </template>
           </CommonInputCode>
           <div class="container__form-btn--submit">
-            <CommonButton
-              :loading="loading"
-              @click-event="handleLogin"
-            >
+            <CommonButton :loading="loading" @click-event="handleLogin">
               <template #label>
                 <span>Enviar</span>
               </template>
@@ -45,47 +38,51 @@
 </template>
 
 <script setup lang="ts">
-import CommonButton from '@/components/common/CommonButton.vue';
-import CommonInputCode from '@/components/common/CommonInputCode.vue';
-import LayoutAuth from '@/components/layout/LayoutAuth.vue';
-import useUserService from '@/composables/useUserService';
-import useValidateFields from '@/composables/useValidateFields';
-import { toast } from 'vue3-toastify';
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import CommonButton from '@/components/common/CommonButton.vue'
+import CommonInputCode from '@/components/common/CommonInputCode.vue'
+import LayoutAuth from '@/components/layout/LayoutAuth.vue'
+import useUserService from '@/composables/useUserService'
+import useValidateFields from '@/utils/validateFields'
+import { useDevice } from '@/composables/useDevice'
+import { toast } from 'vue3-toastify'
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const { tokenVerify } = useUserService();
-const loading = ref(false);
-const payload = {token: ''}
+const { windowSize } = useDevice()
+const router = useRouter()
+const { tokenVerify } = useUserService()
+const loading = ref(false)
+const payload = { token: '' }
 
 function handleInput(value: string) {
-  payload.token = value;
+  payload.token = value
 }
 
 function handleLogin() {
-  loading.value = true;
-  if (useValidateFields(payload)) {
-    loading.value = false;
-    return;
+  loading.value = true
+  if (useValidateFields(payload, windowSize.width)) {
+    loading.value = false
+    return
   }
-  
+
   tokenVerify(payload.token)
     .then((response: any) => {
-      loading.value = false;
+      loading.value = false
       toast.success(response.message, {
-        position: toast.POSITION.BOTTOM_LEFT,
-      });
+        position: toast.POSITION.BOTTOM_LEFT
+      })
       setTimeout(() => {
         router.push(`/recover-password?code=${payload.token}`)
-      }, 3000);
+      }, 3000)
     })
     .catch(({ response }: any) => {
-      loading.value = false;
-      toast.error(response.data.message, {
-        position: toast.POSITION.BOTTOM_LEFT,
+      loading.value = false
+      response.data.message.forEach((e: any) => {
+          toast.error(e.msg, {
+          position: toast.POSITION.BOTTOM_LEFT
+        })
       });
-    });
+    })
 }
 </script>
 <style scoped>
@@ -93,7 +90,6 @@ function handleLogin() {
   font-size: 16px;
   color: #fff;
   margin-bottom: 35px;
-  
 }
 .container__form-title {
   margin-bottom: 10px;

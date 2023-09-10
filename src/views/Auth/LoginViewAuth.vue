@@ -5,33 +5,21 @@
         <div class="container__logo">
           <img src="@/assets/images/logo.svg" alt="Localiza Bus" />
         </div>
-        <h1 class="container__title title">
-          Login
-        </h1>
+        <h1 class="container__title title">Login</h1>
         <form>
-          <CommonInput 
-            @change="handleInput" 
-            type="email" 
-            entryType="email" 
-            placeholder="Digite o seu e-mail"
-          >
+          <CommonInput @change="handleInput" type="email" entryType="email" placeholder="Digite o seu e-mail">
             <template #icon>
-              <img src="@/assets/images/icons/email.svg" alt="Digite o seu e-mail">
+              <img src="@/assets/images/icons/email.svg" alt="Digite o seu e-mail" />
             </template>
           </CommonInput>
-          <CommonInput
-            @change="handleInput" 
-            :type="typePassword" 
-            entryType="senha" 
-            placeholder="Digite a sua senha"
-          >
+          <CommonInput @change="handleInput" :type="typePassword" entryType="password" placeholder="Digite a sua senha">
             <template #icon>
-              <img src="@/assets/images/icons/password.svg" alt="Digite o seu e-mail">
+              <img src="@/assets/images/icons/password.svg" alt="Digite o seu e-mail" />
             </template>
             <template #iconCustom>
               <button class="container__form-btn--visibility" type="button" @click="passwordVisibility()">
-                <img v-show="!visibility" src="@/assets/images/icons/eye-slash.svg"> 
-                <img v-show="visibility" src="@/assets/images/icons/eye.svg"> 
+                <img v-show="!visibility" src="@/assets/images/icons/eye-slash.svg" />
+                <img v-show="visibility" src="@/assets/images/icons/eye.svg" />
               </button>
             </template>
           </CommonInput>
@@ -41,7 +29,7 @@
                 <span>Manter-me logado</span>
               </template>
             </CommonCheckbox>
-            
+
             <router-link class="container__form-link" to="/forgot-password"> Esqueceu sua senha? </router-link>
           </div>
           <div class="container__form-btn--submit">
@@ -65,52 +53,63 @@
 </template>
 
 <script setup lang="ts">
-import CommonButton from '@/components/common/CommonButton.vue';
-import CommonCheckbox from '@/components/common/CommonCheckbox.vue';
-import CommonInput from '@/components/common/CommonInput.vue';
-import LayoutAuth from '@/components/layout/LayoutAuth.vue';
-import { type UserCredentials } from '@/ts/interfaces/user';
-import useUserService from '@/composables/useUserService';
-import useValidateFields from '@/composables/useValidateFields';
-import { toast } from 'vue3-toastify';
+import CommonButton from '@/components/common/CommonButton.vue'
+import CommonCheckbox from '@/components/common/CommonCheckbox.vue'
+import CommonInput from '@/components/common/CommonInput.vue'
+import LayoutAuth from '@/components/layout/LayoutAuth.vue'
+import type { UserCredentials } from '@/ts/interfaces/user'
+import useUserService from '@/composables/useUserService'
+import useValidateFields from '@/utils/validateFields'
+import { useDevice } from '@/composables/useDevice'
+import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
-const { signIn } = useUserService();
-
-const checked = ref(false);
-const loading = ref(false);
-const visibility = ref(false);
-const typePassword = ref('password');
-const payload = { email: '', senha: '' }
+const authStore = useAuthStore();
+const router = useRouter()
+const { windowSize } = useDevice()
+const { signIn } = useUserService()
+const checked = ref(false)
+const loading = ref(false)
+const visibility = ref(false)
+const typePassword = ref('password')
+const payload = { email: '', password: '' }
 
 function handleInput(field: keyof UserCredentials, value: string) {
-  payload[field] = value;
+  payload[field] = value
 }
 
 function handleLogin() {
-  loading.value = true;
+  loading.value = true
 
-  if (useValidateFields(payload)) {
-    loading.value = false;
-    return;
+  if (useValidateFields(payload, windowSize.width)) {
+    loading.value = false
+    return
   }
 
   signIn(payload)
-    .then((response) => {
-      loading.value = false;
-      localStorage.setItem('userloggedIn', JSON.stringify(response.data));
+    .then(({ data }) => {
+      loading.value = false
+      authStore.setTokens({ accessToken: data.token, refreshToken: data.refreshToken, id: data.id, type: data.type });
+      router.push({
+        name: 'Home',
+        path: '/'
+      })
     })
     .catch(({ response }) => {
-      loading.value = false;
-      toast.error(response.data.message, {
-        position: toast.POSITION.BOTTOM_LEFT,
+      loading.value = false
+        response.data.message.forEach((e: any) => {
+          toast.error(e.msg, {
+          position: toast.POSITION.BOTTOM_LEFT
+        })
       });
-    });
+    })
 }
 
-function passwordVisibility(){
+function passwordVisibility() {
   visibility.value = !visibility.value
-  typePassword.value = visibility.value ? 'text' : 'password';
+  typePassword.value = visibility.value ? 'text' : 'password'
 }
 </script>
 

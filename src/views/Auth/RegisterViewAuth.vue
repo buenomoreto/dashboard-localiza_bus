@@ -6,77 +6,49 @@
           Cadastre a <br />
           sua empresa
         </h1>
-        <form>  
+        <form>
           <div class="container__form--flex">
-            <CommonInput 
-              @change="handleInput" 
-              type="text" 
-              entryType="nome" 
-              placeholder="Nome da empresa*"
-            >
+            <CommonInput @change="handleInput" type="text" entryType="name" placeholder="Nome da empresa*">
               <template #icon>
-                <img src="@/assets/images/icons/company.svg" alt="">
+                <img src="@/assets/images/icons/company.svg" alt="" />
               </template>
             </CommonInput>
-            <CommonInput 
-              @change="handleInput" 
-              type="text" 
-              entryType="cnpj" 
-              placeholder="Digite aqui o CNPJ*"
-            >
+            <CommonInput @change="handleInput" type="text" entryType="cnpj" placeholder="Digite aqui o CNPJ*">
               <template #icon>
-                <img src="@/assets/images/icons/cnpj.svg" alt="">
+                <img src="@/assets/images/icons/cnpj.svg" alt="" />
               </template>
             </CommonInput>
           </div>
           <div class="container__form--flex">
-            <CommonInput 
-              @change="handleInput" 
-              type="text" 
-              entryType="telefone" 
-              placeholder="Telefone para contato*"
-            >
+            <CommonInput @change="handleInput" type="text" entryType="phone_number" placeholder="Telefone para contato*">
               <template #icon>
-                <img src="@/assets/images/icons/tel.svg" alt="">
+                <img src="@/assets/images/icons/tel.svg" alt="" />
               </template>
             </CommonInput>
-            <CommonInput 
-              @change="handleInput" 
-              type="text" 
-              entryType="dono" 
-              placeholder="Dono da empresa*"
-            >
+            <CommonInput @change="handleInput" type="text" entryType="owner" placeholder="Dono da empresa*">
               <template #icon>
-                <img src="@/assets/images/icons/name.svg" alt="">
+                <img src="@/assets/images/icons/name.svg" alt="" />
               </template>
             </CommonInput>
           </div>
           <div class="container__form--flex">
-            <CommonInput 
-              @change="handleInput" 
-              type="email" 
-              entryType="email" 
-              placeholder="Digite aqui o seu e-mail*"
-            >
+            <CommonInput @change="handleInput" type="email" entryType="email" placeholder="Digite aqui o seu e-mail*">
               <template #icon>
-                <img src="@/assets/images/icons/email.svg" alt="">
+                <img src="@/assets/images/icons/email.svg" alt="" />
               </template>
             </CommonInput>
-            <CommonInput 
-              @change="handleInput" 
-              type="password" 
-              entryType="senha" 
-              placeholder="Digite aqui a sua senha*"
-            >
+            <CommonInput @change="handleInput" type="password" entryType="password" placeholder="Digite aqui a sua senha*">
               <template #icon>
-                <img src="@/assets/images/icons/password.svg" alt="">
+                <img src="@/assets/images/icons/password.svg" alt="" />
               </template>
             </CommonInput>
           </div>
           <div class="container__form-checkbox">
             <CommonCheckbox :checked="checked">
               <template #label>
-                <span>Eu concordo com todas as declarações incluídas nos <strong class="link--emphasis">Termos de Uso</strong></span>
+                <span
+                  >Eu concordo com todas as declarações incluídas nos <strong class="link--emphasis">Termos de Uso</strong></span
+                >
               </template>
             </CommonCheckbox>
           </div>
@@ -107,58 +79,62 @@
 </template>
 
 <script setup lang="ts">
-import CommonInput from '@/components/common/CommonInput.vue';
-import CommonButton from '@/components/common/CommonButton.vue';
-import CommonCheckbox from '@/components/common/CommonCheckbox.vue';
-import LayoutAuth from '@/components/layout/LayoutAuth.vue';
-import { type Company } from '@/ts/interfaces/company';
-import useCompanyService from '@/composables/useCompanyService';
-import  useValidateFields from "@/composables/useValidateFields";
-import { toast } from 'vue3-toastify';
+import CommonInput from '@/components/common/CommonInput.vue'
+import CommonButton from '@/components/common/CommonButton.vue'
+import CommonCheckbox from '@/components/common/CommonCheckbox.vue'
+import LayoutAuth from '@/components/layout/LayoutAuth.vue'
+import type { Company } from '@/ts/interfaces/company'
+import useCompanyService from '@/composables/useCompanyService'
+import useValidateFields from '@/utils/validateFields'
+import { useDevice } from '@/composables/useDevice'
+import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 
-const router = useRouter();
-const { createCompany } = useCompanyService();
-const checked = ref(false);
-const loading = ref(false);
-const payload = {   
-  nome: '',
+const { windowSize } = useDevice()
+const router = useRouter()
+const { createCompany } = useCompanyService()
+const checked = ref(false)
+const loading = ref(false)
+const payload = {
+  name: '',
   email: '',
   cnpj: '',
-  telefone: '',
-  dono: '',
-  senha: '',
-  tipo: "empresa"
+  phone_number: '',
+  owner: '',
+  password: '',
+  type: 'company'
 }
 
 function handleInput(field: keyof Company, value: string) {
-  payload[field] = value;
+  payload[field] = value
 }
 
 function handleLogin() {
-  loading.value = true;
-  if (useValidateFields(payload)) {
-    loading.value = false;
-    return;
+  loading.value = true
+  if (useValidateFields(payload, windowSize.width)) {
+    loading.value = false
+    return
   }
-  
+
   createCompany(payload)
     .then((response: any) => {
-      loading.value = false;
+      loading.value = false
       toast.success(response.message, {
-        position: toast.POSITION.BOTTOM_LEFT,
-      });
+        position: toast.POSITION.BOTTOM_LEFT
+      })
       setTimeout(() => {
         router.push('/signIn')
-      }, 3000);
+      }, 3000)
     })
     .catch(({ response }: any) => {
-      loading.value = false;
-      toast.error(response.data.message, {
-        position: toast.POSITION.BOTTOM_LEFT,
+      loading.value = false
+      response.data.message.forEach((e: any) => {
+          toast.error(e.msg, {
+          position: toast.POSITION.BOTTOM_LEFT
+        })
       });
-    });
+    })
 }
 </script>
 <style scoped>

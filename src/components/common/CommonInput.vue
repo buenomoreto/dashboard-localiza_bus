@@ -53,16 +53,9 @@ const regexPattern = ref(regexPatterns[entryType])
 const maskEntryTypes = ['cnpj', 'placa', 'telefone']
 
 function handleInputChange(event: Event) {
-  const inputElement = event.target as HTMLInputElement;
-  let sanitizedValue = inputElement.value;
-
-  if (entryType !== 'email') {
-    sanitizedValue = inputElement.value.replace(/\s+|[^a-zA-Z0-9]/g, '');
-  }
-  emit('change', entryType, sanitizedValue);
+  const inputElement = event.target as HTMLInputElement
+  emit('change', entryType, inputElement.value)
 }
-
-
 </script>
 
 <style scoped>

@@ -14,49 +14,49 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
+import { reactive, ref } from 'vue'
 
-  const { type, placeholder } = defineProps<{
-    type: string
-    placeholder: string
-  }>()
+const { type, placeholder } = defineProps<{
+  type: string
+  placeholder: string
+}>()
 
-  const pincode = reactive(['', '', '', '', '', '']);
-  const pincodeInputRefs = ref<HTMLInputElement[]>([]);
-  const emit = defineEmits(['change-code'])
+const pincode = reactive(['', '', '', '', '', ''])
+const pincodeInputRefs = ref<HTMLInputElement[]>([])
+const emit = defineEmits(['change-code'])
 
-  const handleDelete = (index: number) => {
-    if (index > 0) {
-      pincode[index] = '';
-      const prevInput = pincodeInputRefs.value[index - 1];
-      if (prevInput) {
-        prevInput.focus();
-      }
+const handleDelete = (index: number) => {
+  if (index > 0) {
+    pincode[index] = ''
+    const prevInput = pincodeInputRefs.value[index - 1]
+    if (prevInput) {
+      prevInput.focus()
     }
-  };
+  }
+}
 
-  const handleInput = (index: number) => {
-    let input = pincode[index];
-    const inputLength = input.length;
+const handleInput = (index: number) => {
+  let input = pincode[index]
+  const inputLength = input.length
 
-    input = input.replace(/\D/g, '');
+  input = input.replace(/\D/g, '')
 
-    if (input.length === 1) {
-      pincode[index] = input;
-      if (index < pincode.length - 1) {
-        pincodeInputRefs.value[index + 1].focus();
-      }
-    } else if (input.length > 1 || inputLength > 1) {
-      pincode[index] = ''; 
-    } else {
-      pincode[index] = ''; 
+  if (input.length === 1) {
+    pincode[index] = input
+    if (index < pincode.length - 1) {
+      pincodeInputRefs.value[index + 1].focus()
     }
+  } else if (input.length > 1 || inputLength > 1) {
+    pincode[index] = ''
+  } else {
+    pincode[index] = ''
+  }
 
-    const isFilled = pincode.every((digit) => digit.length === 1);
-    if (isFilled) {
-      emit('change-code', pincode.join(''));
-    }
-  };
+  const isFilled = pincode.every((digit) => digit.length === 1)
+  if (isFilled) {
+    emit('change-code', pincode.join(''))
+  }
+}
 </script>
 <style scoped>
 .common__input__code {

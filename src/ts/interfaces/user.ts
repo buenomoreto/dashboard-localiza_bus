@@ -1,21 +1,17 @@
-type User = {
-  id: number;
-  token: string;
-  tipo: string;
-};
+interface User {
+  id: number
+  token: string
+  type: string
+}
 
-type UserCredentials = {
-  email: string;
-  senha: string;
-};
+interface UserCredentials {
+  email: string
+  password: string
+}
 
-type AccessCredentials = {
-  senha: string;
-  token: string;
-};
+interface AccessCredentials {
+  password: string
+  token: string
+}
 
-export type {
-  User,
-  UserCredentials,
-  AccessCredentials
-};
+export { User, UserCredentials, AccessCredentials }

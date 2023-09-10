@@ -1,13 +1,11 @@
-type Company = {
-  nome: string;
-  email: string;
-  cnpj: string;
-  telefone: string;
-  dono: string;
-  senha: string;
-  tipo: string;
+interface Company {
+  name: string
+  email: string
+  cnpj: string
+  phone_number: string
+  owner: string
+  password: string
+  type: string
 }
 
-export type {
-  Company
-}
+export { Company }

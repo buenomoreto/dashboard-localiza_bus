@@ -1,12 +1,6 @@
 <template>
   <label for="checkbox" class="common__checkbox">
-    <input
-      id="checkbox"
-      class="common__checkbox-input"
-      type="checkbox"
-      :checked="checked"
-      @change="handleCheckbox($event)"
-    />
+    <input id="checkbox" class="common__checkbox-input" type="checkbox" :checked="checked" @change="handleCheckbox($event)" />
     <span class="common__checkbox--checkmark"></span>
     <span class="common__checkbox-label">
       <slot name="label"></slot>
@@ -15,15 +9,14 @@
 </template>
 
 <script setup lang="ts">
-const { checked } = defineProps<{ checked: boolean }>();
-const emit = defineEmits(['handle']);
+const { checked } = defineProps<{ checked: boolean }>()
+const emit = defineEmits(['handle'])
 
 function handleCheckbox(event: Event) {
-  const target = event.target as HTMLInputElement;
-  emit('handle', target.checked);
+  const target = event.target as HTMLInputElement
+  emit('handle', target.checked)
 }
 </script>
-
 
 <style scoped>
 .common__checkbox {
