@@ -17,8 +17,8 @@
   gap: 12px;
 }
 .user__photo {
-  max-width: 44px;
-  min-height: 44px;
+  min-height: 55px;
+  max-height: 55px;
 }
 .user__name {
   width: 100px;

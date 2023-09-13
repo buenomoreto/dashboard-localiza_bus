@@ -6,7 +6,7 @@
       </button>
       <div class="menu__navigation">
         <div class="user" v-if="user">
-          <img class="user__photo" v-if="user.user_photo.length" :src="user.user_photo" :alt="user.name" />
+          <img class="user__photo" v-if="user.user_photo" :src="user.user_photo" :alt="user.name" />
           <img class="user__photo" v-else src="@/assets/images/default-profile.png" :alt="user.name" />
           <div class="user__info" v-if="!toggle">
             <p class="user__name">{{ user.owner }}</p>
