@@ -18,11 +18,19 @@ export const useUserStore = defineStore('user', () => {
     }
 
     return getCompany(user.id)
-      .then((response) => response.data)
-      .catch((error) => {
-        console.error(error)
-        redirectToLogin()
+      .then((response) => {
+        if (response.data.user_photo && response.data.user_photo.data) {
+          const data = response.data.user_photo.data;
+          const base64 = btoa(new Uint8Array(data).reduce((data, byte) => data + String.fromCharCode(byte), ''));
+          response.data.user_photo = 'data:image/jpeg;base64,' + base64;
+        }
+        return response.data;
       })
+      .catch((error) => {
+        console.error(error);
+        redirectToLogin();
+      });
+
   }
 
   return { fetchUser }

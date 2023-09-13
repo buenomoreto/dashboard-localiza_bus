@@ -2,11 +2,52 @@
   <LayoutDashboard>
     <template #content>
       <h1>Dashboard</h1>
+      <!-- <input type="file" @change="onFileSelected" />
+      <button @click="onUpload">Upload</button> -->
+
     </template>
   </LayoutDashboard>
 </template>
 <script setup lang="ts">
 import LayoutDashboard from '@/components/layout/LayoutDashboard.vue'
+// import useCompanyService from '@/composables/useCompanyService';
+// import { ref } from 'vue';
+// const { uploadFile  } = useCompanyService();
+// const selectedFile = ref();
+
+// function onFileSelected(event: Event){
+//   const target = event.target as HTMLInputElement;
+//   selectedFile.value = target.files ? target.files[0] : null;
+// }
+
+// async function onUpload() {
+//   const uplaod = new FormData();
+//   uplaod.append('upload', selectedFile.value);
+
+// console.log(uplaod);
+
+//  await uploadFile(1, uplaod)
+//     .then((response: any) => {
+//       console.log(response);
+//     })
+//     .catch(({ response }: any) => {
+//       console.log(response);
+//     })
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // import useDriverService from '@/composables/useDriverService';
 // import { ref } from 'vue';
 // import { io } from 'socket.io-client';

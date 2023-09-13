@@ -6,7 +6,7 @@
       </button>
       <div class="menu__navigation">
         <div class="user" v-if="user">
-          <img class="user__photo" src="@/assets/images/teste-avatar.png" alt="User Photo" />
+          <img class="user__photo" :src="user.user_photo" alt="User Photo" />
           <div class="user__info" v-if="!toggle">
             <p class="user__name">{{ user.owner }}</p>
             <p class="user__company">{{ user.name }}</p>
@@ -91,6 +91,7 @@ async function handleSignOut() {
 }
 async function updateValue() {
   user.value = await userStore.fetchUser()
+  console.log(user.value);
 }
 updateValue()
 </script>
@@ -137,8 +138,12 @@ updateValue()
   gap: 12px;
 }
 .user__photo {
-  max-width: 44px;
-  min-height: 44px;
+  max-width: 55px;
+  object-fit: cover;
+  width: 100%;
+  min-height: 55px;
+  max-height: 55px;
+  border-radius: 30px;
 }
 .user__name {
   font-size: 12px;

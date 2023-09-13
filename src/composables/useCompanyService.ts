@@ -22,6 +22,11 @@ export default function useCompanyService() {
     return response.data
   }
 
+  const uploadFile = async (id: number, uplaod: FormData) => {
+    const response = await api.post(`/admin/company/${id}/upload`, uplaod)
+    return response.data
+  }
+
   const deleteCompany = async (id: number) => {
     const response = await api.delete(`/admin/company/${id}`)
     return response
@@ -32,6 +37,7 @@ export default function useCompanyService() {
     getCompany,
     getAllCompany,
     updateCompany,
-    deleteCompany
+    deleteCompany,
+    uploadFile
   }
 }
