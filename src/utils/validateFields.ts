@@ -1,3 +1,4 @@
+import { translates } from '@/mock/translates'
 import { toast } from 'vue3-toastify'
 
 export default function useValidateFields(params: Record<string, string>, screenWidth: number): boolean {
@@ -12,7 +13,7 @@ export default function useValidateFields(params: Record<string, string>, screen
   if (missingFields.length > 0) {
     if (screenWidth > 1024) {
       missingFields.forEach((missingField) => {
-        const errorMessage = `Preencha o campo obrigatório: ${missingField}`
+        const errorMessage = `Preencha o campo obrigatório: ${translates[missingField]}`
         toast.error(errorMessage, {
           position: toast.POSITION.BOTTOM_LEFT
         })
