@@ -1,21 +1,16 @@
 import { defineStore } from 'pinia'
-
-type AuthState = {
-  accessToken: string
-  refreshToken: string
-  id: number
-  type: string
-}
+import { User } from '../ts/interfaces/user';
+import { type } from '@/ts/enum/type';
 
 export const useAuthStore = defineStore('auth', {
-  state: (): AuthState => ({
+  state: (): User => ({
     accessToken: '',
     refreshToken: '',
     id: 0,
-    type: ''
+    type: type.USER
   }),
   actions: {
-    setTokens(user: AuthState) {
+    setTokens(user: User) {
       Object.assign(this, user)
       localStorage.setItem('userLogged', JSON.stringify(user))
     },
@@ -29,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = ''
       this.refreshToken = ''
       this.id = 0
-      this.type = ''
+      this.type = type.USER
       localStorage.removeItem('userLogged')
     }
   }
