@@ -1,11 +1,17 @@
 import { translates } from '@/mock/translates'
 import { toast } from 'vue3-toastify'
+import { Driver } from '@/ts/interfaces/driver'
+import { Company } from '@/ts/interfaces/company'
+import { Point } from '@/ts/interfaces/point'
+import { Line } from '@/ts/interfaces/line'
+import { Bus } from '@/ts/interfaces/bus'
+import { Review } from '@/ts/interfaces/review'
 
-export default function useValidateFields(params: Record<string, string>, screenWidth: number): boolean {
+export default function useValidateFields(params: Company | Driver | Point | Line | Bus | Review, screenWidth: number): boolean {
   const missingFields: string[] = []
 
   for (const field in params) {
-    if (!params[field] || params[field].length === 0) {
+    if (!params[field]) {
       missingFields.push(field)
     }
   }

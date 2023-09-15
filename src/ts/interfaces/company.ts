@@ -1,16 +1,15 @@
 import { type } from "../enum/type"
 
 interface Company {
+  [key: string]: any;
   name: string
   email: string
-  cpf: string
+  cnpj: string
   phone_number: string
   owner: string
   password: string
-  type: type.COMPANY,
-  user_photo?: string,
-  latitude: number,
-  longitude: number
+  type: type.COMPANY | string
+  user_photo?: string
 }
 
 export { Company }

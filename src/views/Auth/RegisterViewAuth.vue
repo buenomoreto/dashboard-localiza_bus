@@ -83,7 +83,8 @@ import CommonInput from '@/components/common/CommonInput.vue'
 import CommonButton from '@/components/common/CommonButton.vue'
 import CommonCheckbox from '@/components/common/CommonCheckbox.vue'
 import LayoutAuth from '@/components/layout/LayoutAuth.vue'
-import type { Company } from '@/ts/interfaces/company'
+import { Company } from '@/ts/interfaces/company'
+import { type } from '@/ts/enum/type'
 import useCompanyService from '@/composables/useCompanyService'
 import useValidateFields from '@/utils/validateFields'
 import { useDevice } from '@/composables/useDevice'
@@ -96,14 +97,14 @@ const router = useRouter()
 const { createCompany } = useCompanyService()
 const checked = ref(false)
 const loading = ref(false)
-const payload = {
+const payload: Company = {
   name: '',
   email: '',
   cnpj: '',
   phone_number: '',
   owner: '',
   password: '',
-  type: 'company'
+  type: type.COMPANY
 }
 
 function handleInput(field: keyof Company, value: string) {

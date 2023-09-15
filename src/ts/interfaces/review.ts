@@ -1,4 +1,5 @@
 interface Review {
+  [key: string]: any;
   id_driver: number,
   id_user: number,
   rating: number

@@ -3,6 +3,7 @@ import { Point } from "./point";
 import { Line } from "./line";
 
 interface Bus {
+  [key: string]: any;
   id_company: number;
   model: string;
   license_plate: string;

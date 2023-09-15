@@ -14,6 +14,9 @@ export default function useUserService() {
   const signOut = async (refreshToken: string) => {
     let response: any
     try {
+      // toast.loading('Carregando...', {
+      //   position: toast.POSITION.BOTTOM_LEFT
+      // })
       response = await api.post('/user/signOut', { refreshToken })
       await router.push({
         name: 'Login',
