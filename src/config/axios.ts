@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
-// import { User } from '@/ts/interfaces/user';
+import { User } from '@/ts/interfaces/user';
 import useUserService from '@/composables/useUserService'
 import { useRouter } from 'vue-router'
 
@@ -14,15 +14,13 @@ const api: AxiosInstance = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    console.log(config)
-    const user: any = JSON.parse(localStorage.getItem('userLogged') || 'null')
+    const user: User = JSON.parse(localStorage.getItem('userLogged') || 'null')
     if (user && user.accessToken) {
       config.headers.Authorization = `Bearer ${user.accessToken}`
     }
     return config
   },
   (error) => {
-    console.log(error)
     router.push('/login')
     return Promise.reject(error)
   }
@@ -37,11 +35,12 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
 
-      const user: any = JSON.parse(localStorage.getItem('userLogged') || 'null')
+      const user: User = JSON.parse(localStorage.getItem('userLogged') || 'null')
       if (user && user.refreshToken) {
         try {
           const response = await refreshToken(user.refreshToken)
-          user.token = response.data.accessToken
+          user.accessToken = response.data.accessToken
+          console.log(response);
           localStorage.setItem('userLogged', JSON.stringify(user))
           originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`
           return api(originalRequest)

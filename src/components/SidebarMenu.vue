@@ -92,7 +92,6 @@ async function handleSignOut() {
 }
 async function updateValue() {
   user.value = await userStore.fetchUser()
-  console.log(user.value);
 }
 updateValue()
 </script>
