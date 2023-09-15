@@ -2,7 +2,6 @@ import { api } from '@/config/axios'
 import { Line } from '@/ts/interfaces/line'
 
 export default function useLineService() {
-
   const createLine = async (payload: Line) => {
     const response = await api.post('/admin/line/', payload)
     return response

@@ -2,7 +2,6 @@ import { api } from '@/config/axios'
 import { Point } from '@/ts/interfaces/point'
 
 export default function usePointService() {
-
   const createPoint = async (payload: Point) => {
     const response = await api.post('/admin/point/', payload)
     return response

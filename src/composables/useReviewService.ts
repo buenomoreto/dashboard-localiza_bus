@@ -2,7 +2,6 @@ import { api } from '@/config/axios'
 import { Review } from '@/ts/interfaces/review'
 
 export default function useReviewService() {
-
   const createReview = async (payload: Review) => {
     const response = await api.post('/admin/driver/review', payload)
     return response

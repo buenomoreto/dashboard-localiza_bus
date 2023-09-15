@@ -2,7 +2,6 @@ import { api } from '@/config/axios'
 import { Bus } from '@/ts/interfaces/bus'
 
 export default function useBusService() {
-
   const createBus = async (payload: Bus) => {
     const response = await api.post('/admin/bus/', payload)
     return response

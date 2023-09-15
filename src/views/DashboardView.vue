@@ -4,7 +4,6 @@
       <h1>Dashboard</h1>
       <!-- <input type="file" @change="onFileSelected" />
       <button @click="onUpload">Upload</button> -->
-
     </template>
   </LayoutDashboard>
 </template>
@@ -34,19 +33,6 @@ import LayoutDashboard from '@/components/layout/LayoutDashboard.vue'
 //       console.log(response);
 //     })
 // }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import useDriverService from '@/composables/useDriverService';
 // import { ref } from 'vue';

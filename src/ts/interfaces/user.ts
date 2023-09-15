@@ -1,8 +1,8 @@
-import { type } from "../enum/type"
+import { type } from '../enum/type'
 
 interface User {
   id: number
-  accessToken: string 
+  accessToken: string
   refreshToken: string
   type: type
 }

@@ -1,7 +1,7 @@
-import { type } from "../enum/type"
+import { type } from '../enum/type'
 
 interface Company {
-  [key: string]: any;
+  [key: string]: any
   name: string
   email: string
   cnpj: string

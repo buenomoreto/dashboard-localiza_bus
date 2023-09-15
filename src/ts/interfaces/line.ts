@@ -1,5 +1,5 @@
 interface Line {
-  [key: string]: any;
+  [key: string]: any
   line: string
   line_color: string
 }

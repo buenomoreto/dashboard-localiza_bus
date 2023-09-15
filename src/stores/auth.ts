@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
-import { User } from '../ts/interfaces/user';
-import { type } from '@/ts/enum/type';
+import { User } from '../ts/interfaces/user'
+import { type } from '@/ts/enum/type'
 
 export const useAuthStore = defineStore('auth', {
   state: (): User => ({

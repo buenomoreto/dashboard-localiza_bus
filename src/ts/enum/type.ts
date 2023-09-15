@@ -1,5 +1,5 @@
 export enum type {
-  USER = "user",
-  DRIVER = "driver",
-  COMPANY = "company",
+  USER = 'user',
+  DRIVER = 'driver',
+  COMPANY = 'company'
 }

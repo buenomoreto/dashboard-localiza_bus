@@ -1,5 +1,5 @@
 interface Point {
-  [key: string]: any;
+  [key: string]: any
   name: string
   latitude: number
   longitude: number

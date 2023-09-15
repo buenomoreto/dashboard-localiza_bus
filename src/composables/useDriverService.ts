@@ -2,7 +2,6 @@ import { api } from '@/config/axios'
 import { Driver } from '@/ts/interfaces/driver'
 
 export default function useDriverService() {
-
   const createDriver = async (payload: Driver) => {
     const response = await api.post('/admin/driver/', payload)
     return response
