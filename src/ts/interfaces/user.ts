@@ -1,7 +1,10 @@
+import { type } from "../enum/type"
+
 interface User {
   id: number
-  token: string
-  type: string
+  accessToken: string 
+  refreshToken: string
+  type: type
 }
 
 interface UserCredentials {
