@@ -57,7 +57,7 @@ import CommonButton from '@/components/common/CommonButton.vue'
 import CommonCheckbox from '@/components/common/CommonCheckbox.vue'
 import CommonInput from '@/components/common/CommonInput.vue'
 import LayoutAuth from '@/components/layout/LayoutAuth.vue'
-import type { UserCredentials } from '@/ts/interfaces/user'
+import { UserCredentials } from '@/ts/interfaces/user'
 import useUserService from '@/composables/useUserService'
 import useValidateFields from '@/utils/validateFields'
 import { useDevice } from '@/composables/useDevice'
@@ -74,7 +74,7 @@ const checked = ref(false)
 const loading = ref(false)
 const visibility = ref(false)
 const typePassword = ref('password')
-const payload = { email: '', password: '' }
+const payload: UserCredentials = { email: '', password: '' }
 
 function handleInput(field: keyof UserCredentials, value: string) {
   payload[field] = value
