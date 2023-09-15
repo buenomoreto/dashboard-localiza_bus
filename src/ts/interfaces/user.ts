@@ -8,6 +8,7 @@ interface User {
 }
 
 interface UserCredentials {
+  [key: string]: any
   email: string
   password: string
 }

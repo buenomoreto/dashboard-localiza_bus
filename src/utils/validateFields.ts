@@ -6,8 +6,9 @@ import { Point } from '@/ts/interfaces/point'
 import { Line } from '@/ts/interfaces/line'
 import { Bus } from '@/ts/interfaces/bus'
 import { Review } from '@/ts/interfaces/review'
+import { UserCredentials } from '@/ts/interfaces/user'
 
-export default function useValidateFields(params: Company | Driver | Point | Line | Bus | Review, screenWidth: number): boolean {
+export default function useValidateFields(params: UserCredentials | Company | Driver | Point | Line | Bus | Review, screenWidth: number): boolean {
   const missingFields: string[] = []
 
   for (const field in params) {
