@@ -13,7 +13,7 @@
               <img src="@/assets/images/icons/password.svg" alt="" />
             </template>
           </CommonInput>
-          <CommonInput @change="handleInput" type="password" entryType="confirmarSenha" placeholder="Confirme a senha*">
+          <CommonInput @change="handleInput" type="password" entryType="confirmPassword" placeholder="Confirme a senha*">
             <template #icon>
               <img src="@/assets/images/icons/password.svg" alt="" />
             </template>
@@ -51,21 +51,21 @@ const route = useRoute()
 const router = useRouter()
 const { updatePassword } = useUserService()
 const loading = ref(false)
-const payload = { password: '', token: '', confirmarSenha: '' }
+const payload: AccessCredentials = { password: '', token: '', confirmPassword: '' }
 
 function handleInput(field: keyof AccessCredentials, value: string) {
   payload[field] = value
 }
 
 function handleLogin() {
-  let { password, token, confirmarSenha } = payload
+  let { password, token, confirmPassword } = payload
   loading.value = true
 
   if (route.query.code) {
     token = route.query.code.toString()
   }
 
-  if (password !== confirmarSenha) {
+  if (password !== confirmPassword) {
     loading.value = false
     toast.error('Confirmação da senha incorreta.', {
       position: toast.POSITION.BOTTOM_LEFT
@@ -73,7 +73,7 @@ function handleLogin() {
     return
   }
 
-  if (useValidateFields({ password, confirmarSenha }, windowSize.width)) {
+  if (useValidateFields({ password, confirmPassword }, windowSize.width)) {
     loading.value = false
     return
   }

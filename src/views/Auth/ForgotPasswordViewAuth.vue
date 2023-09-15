@@ -45,13 +45,14 @@ import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
 
 type Payload = {
+  [key: string]: any
   email: string
 }
 
 const { windowSize } = useDevice()
 const { accountRecovery } = useUserService()
 const loading = ref(false)
-const payload = { email: '' }
+const payload: Payload = { email: '' }
 
 function handleInput(field: keyof Payload, value: string) {
   payload[field] = value

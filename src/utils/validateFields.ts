@@ -7,8 +7,13 @@ import { Line } from '@/ts/interfaces/line'
 import { Bus } from '@/ts/interfaces/bus'
 import { Review } from '@/ts/interfaces/review'
 import { UserCredentials } from '@/ts/interfaces/user'
+import { AccessCredentials } from '@/ts/interfaces/user'
+interface Email {
+  [key: string]: any
+  email: string
+}
 
-export default function useValidateFields(params: UserCredentials | Company | Driver | Point | Line | Bus | Review, screenWidth: number): boolean {
+export default function useValidateFields(params: AccessCredentials | Email | UserCredentials | Company | Driver | Point | Line | Bus | Review, screenWidth: number): boolean {
   const missingFields: string[] = []
 
   for (const field in params) {

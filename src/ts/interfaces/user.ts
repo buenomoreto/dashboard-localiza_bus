@@ -14,8 +14,10 @@ interface UserCredentials {
 }
 
 interface AccessCredentials {
-  password: string
-  token: string
+  [key: string]: any
+  password?: string
+  token?: string
+  confirmPassword?: string
 }
 
 export { User, UserCredentials, AccessCredentials }
