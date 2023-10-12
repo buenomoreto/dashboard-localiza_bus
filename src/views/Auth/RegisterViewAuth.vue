@@ -130,10 +130,8 @@ function handleLogin() {
     })
     .catch(({ response }: any) => {
       loading.value = false
-      response.data.message.forEach((e: any) => {
-        toast.error(e.msg, {
-          position: toast.POSITION.BOTTOM_LEFT
-        })
+      toast.error(response.data.message, {
+        position: toast.POSITION.BOTTOM_LEFT
       })
     })
 }

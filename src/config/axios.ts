@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios'
 import { User } from '@/ts/interfaces/user'
-import useUserService from '@/composables/useUserService'
 import { useRouter } from 'vue-router'
+import useUserService from '@/composables/useUserService'
 
 const router = useRouter()
 const { refreshToken } = useUserService()
@@ -39,8 +39,7 @@ api.interceptors.response.use(
       if (user && user.refreshToken) {
         try {
           const response = await refreshToken(user.refreshToken)
-          user.accessToken = response.data.accessToken
-          console.log(response)
+          user.accessToken = response.data.accessToken 
           localStorage.setItem('userLogged', JSON.stringify(user))
           originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`
           return api(originalRequest)

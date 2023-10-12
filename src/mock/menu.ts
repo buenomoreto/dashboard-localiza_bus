@@ -1,8 +1,7 @@
-import Dashboard from '@/assets/images/icons/sidebar-menu/dashboard.svg'
-import Bus from '@/assets/images/icons/sidebar-menu/bus.svg'
-import Driver from '@/assets/images/icons/sidebar-menu/driver.svg'
-import Hours from '@/assets/images/icons/sidebar-menu/hours.svg'
-import Points from '@/assets/images/icons/sidebar-menu/points.svg'
+import Dashboard from '@/assets/images/icons/menu/dashboard.svg'
+import Bus from '@/assets/images/icons/menu/bus.svg'
+import Driver from '@/assets/images/icons/menu/driver.svg'
+import Points from '@/assets/images/icons/menu/point.svg'
 
 export const menu = [
   {
@@ -13,29 +12,12 @@ export const menu = [
   {
     label: 'Ônibus',
     icon: Bus,
-    path: '/onibus',
-    subItems: [
-      {
-        label: 'Linha',
-        icon: '',
-        path: '/onibus/linha'
-      },
-      {
-        label: 'Ponto',
-        icon: '',
-        path: '/onibus/ponto'
-      }
-    ]
+    path: '/onibus'
   },
   {
     label: 'Motorista',
     icon: Driver,
     path: '/motorista'
-  },
-  {
-    label: 'Horários',
-    icon: Hours,
-    path: '/horarios'
   },
   {
     label: 'Pontos',

@@ -2,91 +2,132 @@
   <LayoutDashboard>
     <template #content>
       <h1>Dashboard</h1>
-      <!-- <input type="file" @change="onFileSelected" />
-      <button @click="onUpload">Upload</button> -->
+      <div class="container-entity-count">
+        <EntityCount 
+          v-if="busData.length" 
+          entityName="Ônibus" 
+          background="#2BB673"
+          :data="busData" 
+        />
+        <SkeletonEntityCount v-else />
+        <EntityCount 
+          v-if="driverData.length" 
+          entityName="Motoristas" 
+          background="#4D4CAC" 
+          :data="driverData" 
+        />
+        <SkeletonEntityCount v-else />
+        <EntityCount 
+          v-if="pointData.length" 
+          entityName="Pontos" 
+          background="#9698D6" 
+          :data="pointData"
+         />
+        <SkeletonEntityCount v-else />
+      </div>
+      <BaseMap v-if="pointData.length || driverData.length" :point="pointData" :driver="driverData" />
+    </template>
+    <template #content-right>
+      <VCalendar 
+        :first-day-of-week="1"
+        title-position="left" 
+        :attributes="attrs" 
+        @dayclick="handleDate"
+        :masks="{weekdays: 'WWW'}"
+      >
+        <template #header-prev-button>
+          <img src="@/assets/images/icons/arrow-prev.svg" width="40" height="40" alt="" />
+        </template>
+        <template #header-next-button>
+          <img src="@/assets/images/icons/arrow-next.svg" width="40" height="40" alt="" />
+        </template>
+      </VCalendar>
+      <ModificationHistory 
+        :date="selectedDate" 
+        :history="historyData"
+        :loading="loading"
+       />
     </template>
   </LayoutDashboard>
 </template>
+
 <script setup lang="ts">
-import LayoutDashboard from '@/components/layout/LayoutDashboard.vue'
-// import useCompanyService from '@/composables/useCompanyService';
-// import { ref } from 'vue';
-// const { uploadFile  } = useCompanyService();
-// const selectedFile = ref();
+import { ref } from 'vue';
+import moment from 'moment';
+import LayoutDashboard from '@/components/layout/LayoutDashboard.vue';
+import EntityCount from '@/components/EntityCount.vue';
+import SkeletonEntityCount from '@/components/skeletons/SkeletonEntityCount.vue';
+import BaseMap from '@/components/base/BaseMap.vue';
+import ModificationHistory from '@/components/ModificationHistory.vue';
+import useBusService from '@/composables/useBusService';
+import useDriverService from '@/composables/useDriverService';
+import usePointService from '@/composables/usePointService';
+import useHistoryService from '@/composables/useHistoryService';
 
-// function onFileSelected(event: Event){
-//   const target = event.target as HTMLInputElement;
-//   selectedFile.value = target.files ? target.files[0] : null;
-// }
+const { getAllBus } = useBusService()
+const { getAllDriver }= useDriverService()
+const { getAllPoint } = usePointService()
+const { getAllHistory } = useHistoryService()
 
-// async function onUpload() {
-//   const uplaod = new FormData();
-//   uplaod.append('upload', selectedFile.value);
+const currentDate = moment().startOf('day').toDate();
+const attrs = ref([{ dates: currentDate }]);
+const loading = ref(true);
 
-// console.log(uplaod);
+let busData = ref([]);
+let driverData = ref([]);
+let pointData = ref([]);
+let historyData = ref([]);
+let selectedDate = ref(moment(currentDate).format('D [de] MMMM [de] YYYY'));
 
-//  await uploadFile(1, uplaod)
-//     .then((response: any) => {
-//       console.log(response);
-//     })
-//     .catch(({ response }: any) => {
-//       console.log(response);
-//     })
-// }
+const handleDate = async (date: any) => {
+  try {
+    selectedDate.value = moment(date.id).format('D [de] MMMM [de] YYYY');
+    historyData.value = await getAllHistory(date.id, 8, 0);
+  } catch (error) {
+    console.error("History error:", error);
+  } finally {
+    loading.value = false;
+  }
+};
 
-// import useDriverService from '@/composables/useDriverService';
-// import { ref } from 'vue';
-// import { io } from 'socket.io-client';
-// let datateste: any = ref();
-// // Referência para armazenar a localização atual
-// const location = ref<null | { latitude: number; longitude: number }>(null);
+const fetchData = async () => {
+  try {
+    const [bus, driver, point, history] = await Promise.all([
+      getAllBus(),
+      getAllDriver(),
+      getAllPoint(),
+      getAllHistory(currentDate.toISOString(), 8, 0)
+    ]);
 
-// // Função para obter a geolocalização atual do usuário
-// const getGeolocation = () => {
-//   if (!navigator.geolocation) {
-//     console.error('Geolocalização não é suportada por este navegador.');
-//     return;
-//   }
+    busData.value = bus;
+    driverData.value = driver;
+    pointData.value = point;
+    historyData.value = history;
 
-//   navigator.geolocation.watchPosition(
-//     ({ coords }) => {
-//       const { latitude, longitude } = coords;
-//       location.value = { latitude, longitude };
-//       console.log('Localização obtida:', location.value);
-//       updateLocation();
-//     },
-//     (error) => {
-//       console.error('Erro ao obter a localização', error);
-//     }
-//   );
-// };
+  } catch (error) {
+    console.error('Erro ao buscar os dados:', error);
+  } finally {
+    loading.value = false;
+  }
+};
 
-// // Função para atualizar a localização no serviço
-// const updateLocation = async () => {
-//   if (!location.value) {
-//     console.error('Localização não disponível.');
-//     return;
-//   }
+fetchData();
 
-//   try {
-//     const { updateLocation } = useDriverService();
-//     const response = await updateLocation(1, location.value);
-//     console.log('Resposta do serviço:', response);
-//   } catch ({ response }: any) {
-//     console.error('Erro ao atualizar a localização:', response);
-//   }
-// };
-
-// // Obter a geolocalização ao carregar o script
-// getGeolocation();
-
-// const socket = io('http://localhost:3000/', {
-//   transports: ['websocket'],
-//   reconnectionDelayMax: 10000,
-//   timeout: 5000,
-// });
-
-// socket.on('locationUpdated', (data: { id: string; latitude: number; longitude: number }) => {
-//   datateste.value = data;
-// });
 </script>
+
+<style scoped>
+h1 {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222831;
+  margin-bottom: 25px;
+}
+.container-entity-count {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  gap: 20px;
+}
+</style>

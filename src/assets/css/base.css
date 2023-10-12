@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 /* Reset de estilos */
 html,
 body,
@@ -99,7 +98,7 @@ button {
 }
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 body {
@@ -125,4 +124,18 @@ body {
 ::selection {
   color: var(--font-color);
   background-color: var(--border-color);
+}
+
+div::-webkit-scrollbar {
+  width: 8px;
+}
+
+div::-webkit-scrollbar-track  {
+  background-color: #C9C9C9;
+  border-radius: 100px;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: #626467;
+  border-radius: 100px;
 }

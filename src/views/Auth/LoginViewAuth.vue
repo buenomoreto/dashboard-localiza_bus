@@ -66,10 +66,10 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 
-const authStore = useAuthStore()
-const router = useRouter()
 const { windowSize } = useDevice()
 const { signIn } = useUserService()
+const authStore = useAuthStore()
+const router = useRouter()
 const checked = ref(false)
 const loading = ref(false)
 const visibility = ref(false)
@@ -99,10 +99,8 @@ function handleLogin() {
     })
     .catch(({ response }) => {
       loading.value = false
-      response.data.message.forEach((e: any) => {
-        toast.error(e.msg, {
-          position: toast.POSITION.BOTTOM_LEFT
-        })
+      toast.error(response.data.message, {
+        position: toast.POSITION.BOTTOM_LEFT
       })
     })
 }
