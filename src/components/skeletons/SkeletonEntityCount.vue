@@ -1,11 +1,8 @@
 <template>
   <div class="skeleton-content loading" />
-   
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 <style scoped>
 .skeleton-content {
   width: 100%;

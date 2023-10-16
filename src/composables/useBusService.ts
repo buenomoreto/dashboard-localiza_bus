@@ -12,9 +12,29 @@ export default function useBusService() {
     return response
   }
 
-  const getAllBus = async () => {
-    const response = await api.get('/admin/bus')
-    return response.data
+  const getAllBus = async (
+    color?: string,
+    recent?: boolean,
+    limit: number = 10,
+    offset: number = 0
+  ): Promise<any> => {
+    const params = new URLSearchParams()
+
+    if (color) {
+      params.append('color', color)
+    }
+
+    if (typeof recent === 'boolean') {
+      params.append('recent', recent.toString())
+    }
+
+    params.append('limit', limit.toString())
+    params.append('offset', offset.toString())
+
+    const url = `/admin/bus?${params.toString()}`
+
+    const { data } = await api.get(url)
+    return data
   }
 
   const updateBus = async (id: number, payload: Bus) => {

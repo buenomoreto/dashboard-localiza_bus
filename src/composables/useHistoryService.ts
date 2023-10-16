@@ -2,8 +2,14 @@ import { api } from '@/config/axios'
 import { History } from '@/ts/interfaces/history'
 
 export default function useHistoryService() {
-  const getAllHistory = async (startDate: string, limit: number, offset: number) => {
-    const response = await api.get(`/admin/history?startDate=${startDate}&limit=${limit}&offset=${offset}`)
+  const getAllHistory = async (
+    startDate: string,
+    limit: number,
+    offset: number
+  ) => {
+    const response = await api.get(
+      `/admin/history?startDate=${startDate}&limit=${limit}&offset=${offset}`
+    )
 
     return response.data.map((item: History) => ({
       ...item,

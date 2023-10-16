@@ -2,7 +2,7 @@
   <div class="skeleton-item">
     <div class="skeleton-photo loading" />
     <div class="skeleton-item__message loading" />
-</div>
+  </div>
 </template>
 <style scoped>
 .skeleton-item {

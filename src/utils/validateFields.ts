@@ -12,9 +12,21 @@ interface Email {
   [key: string]: any
   email: string
 }
-type paramsTypes = AccessCredentials | Email | UserCredentials | Company | Driver | Point | Line | Bus | Review
+type paramsTypes =
+  | AccessCredentials
+  | Email
+  | UserCredentials
+  | Company
+  | Driver
+  | Point
+  | Line
+  | Bus
+  | Review
 
-export default function useValidateFields(params: paramsTypes, screenWidth: number): boolean {
+export default function useValidateFields(
+  params: paramsTypes,
+  screenWidth: number
+): boolean {
   const missingFields: string[] = []
 
   for (const field in params) {

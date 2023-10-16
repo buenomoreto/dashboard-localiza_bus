@@ -3,10 +3,10 @@
     <BaseHeader />
     <div class="dashboard">
       <SidebarMenu />
-      <section class="content">
+      <section class="content" :class="{ expand: route.path !== '/' }">
         <slot name="content" />
       </section>
-      <section class="content-right">
+      <section v-if="route.path == '/'" class="content-right">
         <slot name="content-right" />
       </section>
     </div>
@@ -14,8 +14,31 @@
 </template>
 
 <script setup lang="ts">
+import { useUserStore } from '@/stores/user'
+import { useRouter } from 'vue-router'
+import useCompanyService from '@/composables/useCompanyService'
 import SidebarMenu from '@/components/SidebarMenu.vue'
 import BaseHeader from '../base/BaseHeader.vue'
+import { useRoute } from 'vue-router'
+
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
+const route = useRoute()
+const router = useRouter()
+const useStore = useUserStore()
+const { getCompany } = useCompanyService()
+
+const fetchUser = async () => {
+  await getCompany(user.id)
+    .then(({ data }) => {
+      useStore.setUser(data)
+    })
+    .catch((error) => {
+      console.log('company error', error)
+      router.push({ name: 'Login' })
+    })
+}
+
+fetchUser()
 </script>
 <style scoped>
 .dashboard {
@@ -28,6 +51,9 @@ import BaseHeader from '../base/BaseHeader.vue'
 .content {
   width: 58%;
   padding: 30px 0;
+}
+.content.expand {
+  width: calc(100% - 15%);
 }
 .content-right {
   width: 25%;

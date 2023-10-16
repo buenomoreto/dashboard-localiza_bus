@@ -7,18 +7,41 @@
         </div>
         <h1 class="container__title title">Login</h1>
         <form>
-          <CommonInput @change="handleInput" type="email" entryType="email" placeholder="Digite o seu e-mail">
+          <CommonInput
+            @change="handleInput"
+            type="email"
+            entryType="email"
+            placeholder="Digite o seu e-mail"
+          >
             <template #icon>
-              <img src="@/assets/images/icons/email.svg" alt="Digite o seu e-mail" />
+              <img
+                src="@/assets/images/icons/email.svg"
+                alt="Digite o seu e-mail"
+              />
             </template>
           </CommonInput>
-          <CommonInput @change="handleInput" :type="typePassword" entryType="password" placeholder="Digite a sua senha">
+          <CommonInput
+            @change="handleInput"
+            :type="typePassword"
+            entryType="password"
+            placeholder="Digite a sua senha"
+          >
             <template #icon>
-              <img src="@/assets/images/icons/password.svg" alt="Digite o seu e-mail" />
+              <img
+                src="@/assets/images/icons/password.svg"
+                alt="Digite o seu e-mail"
+              />
             </template>
             <template #iconCustom>
-              <button class="container__form-btn--visibility" type="button" @click="passwordVisibility()">
-                <img v-show="!visibility" src="@/assets/images/icons/eye-slash.svg" />
+              <button
+                class="container__form-btn--visibility"
+                type="button"
+                @click="passwordVisibility()"
+              >
+                <img
+                  v-show="!visibility"
+                  src="@/assets/images/icons/eye-slash.svg"
+                />
                 <img v-show="visibility" src="@/assets/images/icons/eye.svg" />
               </button>
             </template>
@@ -30,7 +53,9 @@
               </template>
             </CommonCheckbox>
 
-            <router-link class="container__form-link" to="/forgot-password"> Esqueceu sua senha? </router-link>
+            <router-link class="container__form-link" to="/forgot-password">
+              Esqueceu sua senha?
+            </router-link>
           </div>
           <div class="container__form-btn--submit">
             <CommonButton @click-event="handleLogin" :loading="loading">
@@ -42,7 +67,9 @@
         </form>
         <div class="container__form-register">
           <p class="container__text">Ainda não possui uma conta?</p>
-          <router-link class="link--emphasis" to="/register"> Cadastre-se </router-link>
+          <router-link class="link--emphasis" to="/register">
+            Cadastre-se
+          </router-link>
         </div>
       </div>
     </template>
@@ -91,7 +118,12 @@ function handleLogin() {
   signIn(payload)
     .then(({ data }) => {
       loading.value = false
-      authStore.setTokens({ accessToken: data.token, refreshToken: data.refreshToken, id: data.id, type: data.type })
+      authStore.setTokens({
+        accessToken: data.token,
+        refreshToken: data.refreshToken,
+        id: data.id,
+        type: data.type
+      })
       router.push({
         name: 'Home',
         path: '/'

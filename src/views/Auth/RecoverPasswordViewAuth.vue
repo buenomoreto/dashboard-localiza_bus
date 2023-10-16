@@ -2,18 +2,28 @@
   <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
-        <!-- <div class="container__form-logo">
-          <img src="@/assets/images/logo.svg" alt="" />
-        </div> -->
         <h1 class="container__form-title title">Redefinir senha</h1>
-        <p class="container__form-text">Por favor, preencha os campos abaixo com a nova senha desejada e sua confirmação.</p>
+        <p class="container__form-text">
+          Por favor, preencha os campos abaixo com a nova senha desejada e sua
+          confirmação.
+        </p>
         <form action="">
-          <CommonInput @change="handleInput" type="password" entryType="senha" placeholder="Digite a sua nova senha*">
+          <CommonInput
+            @change="handleInput"
+            type="password"
+            entryType="senha"
+            placeholder="Digite a sua nova senha*"
+          >
             <template #icon>
               <img src="@/assets/images/icons/password.svg" alt="" />
             </template>
           </CommonInput>
-          <CommonInput @change="handleInput" type="password" entryType="confirmPassword" placeholder="Confirme a senha*">
+          <CommonInput
+            @change="handleInput"
+            type="password"
+            entryType="confirmPassword"
+            placeholder="Confirme a senha*"
+          >
             <template #icon>
               <img src="@/assets/images/icons/password.svg" alt="" />
             </template>
@@ -51,7 +61,11 @@ const route = useRoute()
 const router = useRouter()
 const { updatePassword } = useUserService()
 const loading = ref(false)
-const payload: AccessCredentials = { password: '', token: '', confirmPassword: '' }
+const payload: AccessCredentials = {
+  password: '',
+  token: '',
+  confirmPassword: ''
+}
 
 function handleInput(field: keyof AccessCredentials, value: string) {
   payload[field] = value

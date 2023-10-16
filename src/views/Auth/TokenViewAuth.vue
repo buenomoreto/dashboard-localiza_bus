@@ -2,18 +2,20 @@
   <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
-        <!-- <div class="container__form-logo">
-          <img src="@/assets/images/logo.svg" alt="" />
-        </div> -->
         <h1 class="container__form-title title">
           <img src="@/assets/images/icons/code.svg" alt="" />
           Autentique sua conta
         </h1>
         <p class="container__form-text">
-          Por favor, confirme sua conta digitando o código de autorização enviado para o seu e-mail.
+          Por favor, confirme sua conta digitando o código de autorização
+          enviado para o seu e-mail.
         </p>
         <form action="">
-          <CommonInputCode @change-code="handleInput" type="text" placeholder="*">
+          <CommonInputCode
+            @change-code="handleInput"
+            type="text"
+            placeholder="*"
+          >
             <template #icon>
               <img src="@/assets/images/icons/email.svg" alt="" />
             </template>
@@ -27,7 +29,9 @@
           </div>
         </form>
         <div class="container__form-login">
-          <router-link class="link--emphasis" to="/singIn">Não recebeu? Reenvie um novo código</router-link>
+          <router-link class="link--emphasis" to="/singIn"
+            >Não recebeu? Reenvie um novo código</router-link
+          >
         </div>
       </div>
     </template>

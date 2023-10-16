@@ -2,15 +2,18 @@
   <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
-        <!-- <div class="container__form-logo">
-          <img src="@/assets/images/logo.svg" alt="" />
-        </div> -->
         <h1 class="container__form-title title">Esqueceu sua senha?</h1>
         <p class="container__form-text">
-          Preencha abaixo seu endereço de e-mail para receber as instruções necessárias e criar uma nova senha.
+          Preencha abaixo seu endereço de e-mail para receber as instruções
+          necessárias e criar uma nova senha.
         </p>
         <form action="">
-          <CommonInput @change="handleInput" type="email" entryType="email" placeholder="Digite aqui o seu e-mail*">
+          <CommonInput
+            @change="handleInput"
+            type="email"
+            entryType="email"
+            placeholder="Digite aqui o seu e-mail*"
+          >
             <template #icon>
               <img src="@/assets/images/icons/email.svg" alt="" />
             </template>
@@ -24,7 +27,9 @@
           </div>
         </form>
         <div class="container__form-login">
-          <router-link class="link--emphasis" to="/singIn"> Fazer login</router-link>
+          <router-link class="link--emphasis" to="/singIn">
+            Fazer login</router-link
+          >
         </div>
       </div>
     </template>

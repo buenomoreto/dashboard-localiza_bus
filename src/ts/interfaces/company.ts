@@ -9,7 +9,7 @@ interface Company {
   owner: string
   password: string
   type: type.COMPANY | string
-  user_photo?: string
+  user_photo?: string | { data: [] }
 }
 
 export { Company }

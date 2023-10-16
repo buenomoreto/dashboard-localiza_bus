@@ -1,21 +1,31 @@
 <template>
   <div class="map">
-    <div class="map__container">
+    <div class="map__container" v-if="center">
       <l-map ref="map" v-model:zoom="zoom" :center="center">
         <l-tile-layer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           layer-type="base"
           name="OpenStreetMap"
         ></l-tile-layer>
-        <l-marker v-for="p in point" :key="p.id" :lat-lng="[p.latitude, p.longitude]" :icon="pointIcon"></l-marker>
-        <l-marker v-for="d in driver" :key="d.id" :lat-lng="[d.latitude, d.longitude]" :icon="driverIcon"></l-marker>
+        <l-marker
+          v-for="p in point"
+          :key="p.id"
+          :lat-lng="[p.latitude, p.longitude]"
+          :icon="pointIcon"
+        ></l-marker>
+        <l-marker
+          v-for="d in driver"
+          :key="d.id"
+          :lat-lng="[d.latitude, d.longitude]"
+          :icon="driverIcon"
+        ></l-marker>
       </l-map>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import 'leaflet/dist/leaflet.css'
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet'
 import * as L from 'leaflet'
@@ -38,8 +48,7 @@ const { point, driver } = defineProps<{
 }>()
 
 const zoom = ref(14)
-const center = ref([-21.28198664189604, -50.332422881087474])
-
+const center = ref()
 const pointIcon = new L.Icon({
   iconUrl: markerPoint,
   shadowUrl: markerShadow,
@@ -54,6 +63,22 @@ const driverIcon = new L.Icon({
   iconSize: [70, 100],
   iconAnchor: [12, 41],
   shadowSize: [0, 0]
+})
+
+onMounted(() => {
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        center.value = [position.coords.latitude, position.coords.longitude]
+      },
+      (error) => {
+        console.log('geolocation', error)
+        center.value = [-23.55052, -46.633308]
+      }
+    )
+  } else {
+    center.value = [-23.55052, -46.633308]
+  }
 })
 </script>
 

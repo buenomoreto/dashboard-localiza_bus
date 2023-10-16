@@ -2,11 +2,9 @@
   <header class="header">
     <div class="logo">logo</div>
     <div class="search">
-      <CommonSearch /> 
+      <CommonSearch />
       <CommonButtonDash class="button">
-        <template #label>
-          Cadastrar novo ônibus
-        </template>
+        <template #label> Cadastrar novo ônibus </template>
       </CommonButtonDash>
     </div>
     <div class="user"></div>
@@ -14,8 +12,8 @@
 </template>
 
 <script setup lang="ts">
-import CommonButtonDash from '../common/CommonButtonDash.vue';
-import CommonSearch from '../common/CommonSearch.vue';
+import CommonButtonDash from '../common/CommonButtonDash.vue'
+import CommonSearch from '../common/CommonSearch.vue'
 CommonSearch
 </script>
 

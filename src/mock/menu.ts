@@ -12,16 +12,16 @@ export const menu = [
   {
     label: 'Ônibus',
     icon: Bus,
-    path: '/onibus'
+    path: '/bus'
   },
   {
     label: 'Motorista',
     icon: Driver,
-    path: '/motorista'
+    path: '/driver'
   },
   {
     label: 'Pontos',
     icon: Points,
-    path: '/pontos'
+    path: '/point'
   }
 ]

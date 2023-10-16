@@ -1,6 +1,10 @@
 <template>
   <div class="common__input__code">
-    <div v-for="(digit, index) in pincode" :key="index" class="common__input__code__box">
+    <div
+      v-for="(digit, index) in pincode"
+      :key="index"
+      class="common__input__code__box"
+    >
       <input
         :type="type"
         :placeholder="placeholder"

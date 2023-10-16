@@ -35,11 +35,13 @@ api.interceptors.response.use(
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true
 
-      const user: User = JSON.parse(localStorage.getItem('userLogged') || 'null')
+      const user: User = JSON.parse(
+        localStorage.getItem('userLogged') || 'null'
+      )
       if (user && user.refreshToken) {
         try {
           const response = await refreshToken(user.refreshToken)
-          user.accessToken = response.data.accessToken 
+          user.accessToken = response.data.accessToken
           localStorage.setItem('userLogged', JSON.stringify(user))
           originalRequest.headers.Authorization = `Bearer ${response.data.accessToken}`
           return api(originalRequest)

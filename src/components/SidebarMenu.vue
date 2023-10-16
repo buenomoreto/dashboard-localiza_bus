@@ -2,8 +2,20 @@
   <nav class="menu">
     <div class="user" v-if="user">
       <div class="user-photo">
-        <img v-if="user.user_photo" :src="user.user_photo" :alt="user.owner" width="82" height="82" />
-        <img v-else src="@/assets/images/default-profile.png" :alt="user.owner" width="82" height="82" />
+        <img
+          v-if="user.user_photo"
+          :src="user.user_photo"
+          :alt="user.owner"
+          width="82"
+          height="82"
+        />
+        <img
+          v-else
+          src="@/assets/images/default-profile.png"
+          :alt="user.owner"
+          width="82"
+          height="82"
+        />
       </div>
       <div class="user-name">
         {{ user.name }}
@@ -14,7 +26,13 @@
       <div>
         <li v-for="(item, index) in menu" :key="index" class="navigation__item">
           <router-link class="navigation__link" :to="item.path">
-            <img v-if="item.icon" :src="item.icon" :alt="item.label" width="20" height="20">
+            <img
+              v-if="item.icon"
+              :src="item.icon"
+              :alt="item.label"
+              width="20"
+              height="20"
+            />
             <span>
               {{ item.label }}
             </span>
@@ -23,7 +41,12 @@
       </div>
       <div>
         <li @click="handleSignOut" class="navigation__item navigation__link">
-          <img src="@/assets/images/icons/menu/logout.svg" alt="Sair" width="20" height="20">
+          <img
+            src="@/assets/images/icons/menu/logout.svg"
+            alt="Sair"
+            width="20"
+            height="20"
+          />
           Sair
         </li>
       </div>
@@ -32,30 +55,27 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { menu } from '@/mock/menu'
 import { useUserStore } from '@/stores/user'
 import { useAuthStore } from '@/stores/auth'
 import useUserService from '@/composables/useUserService'
 import SkeletonProfile from './skeletons/SkeletonProfile.vue'
 
-const authStore = useAuthStore()
-const { getUser } = useUserStore()
-const { signOut } = useUserService()
 const user = ref()
+const useStore = useUserStore()
+const authStore = useAuthStore()
+const { signOut } = useUserService()
+
+watch(useStore, (newValue) => {
+  user.value = newValue.userData
+})
 
 async function handleSignOut() {
   await signOut(authStore.refreshToken).then(() => {
     authStore.clearTokens()
   })
 }
-
-async function initUser() {
-  user.value = await getUser()
-}
-
-initUser()
-
 </script>
 
 <style scoped>
@@ -63,7 +83,7 @@ initUser()
   width: 17%;
   background-color: #ffffff;
   padding: 25px 0 20px 0;
-  box-shadow: 0px 4px 20px 0px #EEEEEE33;
+  box-shadow: 0px 4px 20px 0px #eeeeee33;
 }
 .user {
   display: flex;
@@ -109,7 +129,7 @@ initUser()
   align-items: center;
   gap: 30px;
   cursor: pointer;
-  color: #393E46;
+  color: #393e46;
 }
 .navigation__link::before {
   content: '';

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import DashboardView from '@/views/DashboardView.vue'
 import DashboardListing from '@/views/DashboardListingView.vue'
 import DashboardEditing from '@/views/DashboardEditingView.vue'
+import DashboardCreation from '@/views/DashboardCreationView.vue'
 import LoginViewAuth from '@/views/Auth/LoginViewAuth.vue'
 import ForgotPasswordViewAuth from '@/views/Auth/ForgotPasswordViewAuth.vue'
 import RegisterViewAuth from '@/views/Auth/RegisterViewAuth.vue'
@@ -50,21 +51,13 @@ const router = createRouter({
       path: '/:listing/editing',
       name: 'Editing',
       component: DashboardEditing
+    },
+    {
+      path: '/:listing/creation',
+      name: 'Creation',
+      component: DashboardCreation
     }
   ]
 })
-
-// router.beforeEach((to, from, next) => {
-//   const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
-
-//   const allowedRoutes = ['/signIn', '/register', '/forgot-password', '/auth-token', '/recover-password']
-
-//   if (!user && !allowedRoutes.includes(to.path)) {
-//     next('/signIn')
-//     return
-//   }
-
-//   next()
-// })
 
 export default router

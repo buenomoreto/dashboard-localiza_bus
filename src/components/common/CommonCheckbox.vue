@@ -1,6 +1,12 @@
 <template>
   <label for="checkbox" class="common__checkbox">
-    <input id="checkbox" class="common__checkbox-input" type="checkbox" :checked="checked" @change="handleCheckbox($event)" />
+    <input
+      id="checkbox"
+      class="common__checkbox-input"
+      type="checkbox"
+      :checked="checked"
+      @change="handleCheckbox($event)"
+    />
     <span class="common__checkbox--checkmark"></span>
     <span class="common__checkbox-label">
       <slot name="label"></slot>

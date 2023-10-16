@@ -1,6 +1,11 @@
 <template>
   <div class="common__button">
-    <button type="button" class="common__button__inner" @click="handleClick" :disabled="loading">
+    <button
+      type="button"
+      class="common__button__inner"
+      @click="handleClick"
+      :disabled="loading"
+    >
       <slot v-if="!loading" name="label"></slot>
       <img v-if="loading" src="@/assets/images/loading.svg" />
     </button>

@@ -1,7 +1,7 @@
 interface Line {
   [key: string]: any
-  line: string
-  line_color: string
+  name: string
+  color: string
 }
 
 export { Line }

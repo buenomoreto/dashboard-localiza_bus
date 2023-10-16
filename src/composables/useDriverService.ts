@@ -32,7 +32,10 @@ export default function useDriverService() {
     return response
   }
 
-  const updateLocation = async (id: number, payload: { latitude: number; longitude: number }) => {
+  const updateLocation = async (
+    id: number,
+    payload: { latitude: number; longitude: number }
+  ) => {
     const response = await api.put(`/admin/driver/location/${id}`, payload)
     return response
   }

@@ -8,36 +8,66 @@
         </h1>
         <form>
           <div class="container__form--flex">
-            <CommonInput @change="handleInput" type="text" entryType="name" placeholder="Nome da empresa*">
+            <CommonInput
+              @change="handleInput"
+              type="text"
+              entryType="name"
+              placeholder="Nome da empresa*"
+            >
               <template #icon>
                 <img src="@/assets/images/icons/company.svg" alt="" />
               </template>
             </CommonInput>
-            <CommonInput @change="handleInput" type="text" entryType="cnpj" placeholder="Digite aqui o CNPJ*">
+            <CommonInput
+              @change="handleInput"
+              type="text"
+              entryType="cnpj"
+              placeholder="Digite aqui o CNPJ*"
+            >
               <template #icon>
                 <img src="@/assets/images/icons/cnpj.svg" alt="" />
               </template>
             </CommonInput>
           </div>
           <div class="container__form--flex">
-            <CommonInput @change="handleInput" type="text" entryType="phone_number" placeholder="Telefone para contato*">
+            <CommonInput
+              @change="handleInput"
+              type="text"
+              entryType="phone_number"
+              placeholder="Telefone para contato*"
+            >
               <template #icon>
                 <img src="@/assets/images/icons/tel.svg" alt="" />
               </template>
             </CommonInput>
-            <CommonInput @change="handleInput" type="text" entryType="owner" placeholder="Dono da empresa*">
+            <CommonInput
+              @change="handleInput"
+              type="text"
+              entryType="owner"
+              placeholder="Dono da empresa*"
+            >
               <template #icon>
                 <img src="@/assets/images/icons/name.svg" alt="" />
               </template>
             </CommonInput>
           </div>
           <div class="container__form--flex">
-            <CommonInput @change="handleInput" type="email" entryType="email" placeholder="Digite aqui o seu e-mail*">
+            <CommonInput
+              @change="handleInput"
+              type="email"
+              entryType="email"
+              placeholder="Digite aqui o seu e-mail*"
+            >
               <template #icon>
                 <img src="@/assets/images/icons/email.svg" alt="" />
               </template>
             </CommonInput>
-            <CommonInput @change="handleInput" type="password" entryType="password" placeholder="Digite aqui a sua senha*">
+            <CommonInput
+              @change="handleInput"
+              type="password"
+              entryType="password"
+              placeholder="Digite aqui a sua senha*"
+            >
               <template #icon>
                 <img src="@/assets/images/icons/password.svg" alt="" />
               </template>
@@ -47,7 +77,8 @@
             <CommonCheckbox :checked="checked">
               <template #label>
                 <span
-                  >Eu concordo com todas as declarações incluídas nos <strong class="link--emphasis">Termos de Uso</strong></span
+                  >Eu concordo com todas as declarações incluídas nos
+                  <strong class="link--emphasis">Termos de Uso</strong></span
                 >
               </template>
             </CommonCheckbox>
@@ -63,11 +94,15 @@
         <div class="container__form-nav">
           <div>
             <p class="container__text">Ainda não possui uma conta?</p>
-            <router-link class="link--emphasis" to="/signIn"> Entrar agora </router-link>
+            <router-link class="link--emphasis" to="/signIn">
+              Entrar agora
+            </router-link>
           </div>
           <div>
             <p class="container__text">Ainda não possui uma conta?</p>
-            <router-link class="link--emphasis" to="/forgot-password"> Redefinir senha </router-link>
+            <router-link class="link--emphasis" to="/forgot-password">
+              Redefinir senha
+            </router-link>
           </div>
         </div>
       </div>

@@ -21,5 +21,8 @@ export const translates: { [key: string]: string } = {
   hours: 'horas',
   rating: 'avaliação',
   comments: 'comentários',
-  anonymous: 'anônimo'
+  anonymous: 'anônimo',
+  driver: 'motorista',
+  point: 'ponto',
+  bus: 'ônibus'
 }

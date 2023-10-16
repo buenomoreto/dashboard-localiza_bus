@@ -1,10 +1,15 @@
 <template>
   <div class="content" :style="{ background: background }">
     <div class="icon">
-      <img :src="iconPath" alt=""> 
+      <img :src="iconPath" alt="" />
     </div>
     <div class="text">
-      <span class="text__entity-name"> {{ data.length }} {{ entityName }} </span>
+      <span class="text__entity-name" v-if="data.length">
+        {{ data.length }} {{ entityName }}
+      </span>
+      <span class="text__entity-name" v-else>
+        Nenhum {{ entityName }} cadastrados.
+      </span>
     </div>
   </div>
 </template>
@@ -17,24 +22,24 @@ import Points from '@/assets/images/icons/point-white.svg'
 
 const { entityName, background, data } = defineProps<{
   entityName: string
-  background: string,
+  background: string
   data: any[]
 }>()
 
 type IconMap = {
-  'Ônibus': string,
-  'Motoristas': string,
-  'Pontos': string
+  Ônibus: string
+  Motoristas: string
+  Pontos: string
 }
 
 const iconMap = ref({
-  'Ônibus': Bus,
-  'Motoristas': Driver,
-  'Pontos': Points
+  Ônibus: Bus,
+  Motoristas: Driver,
+  Pontos: Points
 })
 
 const iconPath = computed(() => {
-  return iconMap.value[entityName as keyof IconMap] || ''; 
+  return iconMap.value[entityName as keyof IconMap] || ''
 })
 </script>
 
