@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect, defineProps } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 
 const props = defineProps({

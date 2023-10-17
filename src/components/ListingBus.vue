@@ -39,7 +39,6 @@
 
 <script setup lang="ts">
 import { Bus } from '@/ts/interfaces/bus'
-import { defineProps } from 'vue'
 
 const opacity = 60
 const { buses } = defineProps<{
