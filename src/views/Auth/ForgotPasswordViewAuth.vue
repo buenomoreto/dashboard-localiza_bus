@@ -2,17 +2,16 @@
   <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
-        <h1 class="container__form-title title">Esqueceu sua senha?</h1>
+        <h1 class="container__form-title title">Esqueci minha senha</h1>
         <p class="container__form-text">
-          Preencha abaixo seu endereço de e-mail para receber as instruções
-          necessárias e criar uma nova senha.
+          Digite seu endereço de e-mail para receber as instruções necessárias e criar uma nova senha.
         </p>
         <form action="">
           <CommonInput
             @change="handleInput"
             type="email"
             entryType="email"
-            placeholder="Digite aqui o seu e-mail*"
+            placeholder="Digite seu e-mail*"
           >
             <template #icon>
               <img src="@/assets/images/icons/email.svg" alt="" />
@@ -28,13 +27,10 @@
         </form>
         <div class="container__form-login">
           <router-link class="link--emphasis" to="/singIn">
-            Fazer login</router-link
-          >
+            Voltar para o login
+          </router-link>
         </div>
       </div>
-    </template>
-    <template #contentImage>
-      <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
     </template>
   </LayoutAuth>
 </template>
@@ -45,7 +41,6 @@ import CommonInput from '@/components/common/CommonInput.vue'
 import LayoutAuth from '@/components/layout/LayoutAuth.vue'
 import useUserService from '@/composables/useUserService'
 import useValidateFields from '@/utils/validateFields'
-import { useDevice } from '@/composables/useDevice'
 import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
 
@@ -54,7 +49,6 @@ type Payload = {
   email: string
 }
 
-const { windowSize } = useDevice()
 const { accountRecovery } = useUserService()
 const loading = ref(false)
 const payload: Payload = { email: '' }
@@ -65,7 +59,7 @@ function handleInput(field: keyof Payload, value: string) {
 
 function handleLogin() {
   loading.value = true
-  if (useValidateFields(payload, windowSize.width)) {
+  if (useValidateFields(payload)) {
     loading.value = false
     return
   }
@@ -87,18 +81,20 @@ function handleLogin() {
 </script>
 <style scoped>
 .container__form-text {
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 35px;
+  color: #393E46;
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  line-height: 166.667% ; 
 }
 .container__form-title {
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .container__form-btn--submit {
-  max-width: 350px;
+  max-width: 250px;
   margin: 0 auto;
+  margin-top: 25px;
 }
 
 .container__form-login {

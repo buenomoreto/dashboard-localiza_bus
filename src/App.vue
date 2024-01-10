@@ -6,5 +6,3 @@ import 'vue3-toastify/dist/index.css'
 <template>
   <RouterView />
 </template>
-
-<style scoped></style>

@@ -71,16 +71,20 @@ const handleInput = (index: number) => {
 }
 
 .common__input__code__box {
-  border: 1px solid #2bb673;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   padding: 5px;
-  max-width: 40px;
-  color: var(--font-color);
+  min-width: 40px;
+  min-height: 40px;
+  color: #2bb673;
   text-indent: 10px;
+  background: #fff;
 }
+.common__input__code__box:hover {
+  border: 1px solid #2bb673;
 
+}
 .common__input__code input::placeholder {
   color: var(--font-color);
   font-size: 14px;

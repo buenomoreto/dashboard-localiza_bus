@@ -24,5 +24,7 @@ export const translates: { [key: string]: string } = {
   anonymous: 'anônimo',
   driver: 'motorista',
   point: 'ponto',
-  bus: 'ônibus'
+  bus: 'ônibus',
+  color: 'cor',
+  id_bus: 'Nenhum ônibus cadastado'
 }

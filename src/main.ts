@@ -12,6 +12,7 @@ import 'moment/locale/pt-br'
 import 'moment/dist/locale/pt-br'
 import App from './App.vue'
 import router from './router'
+import PrimeVue from 'primevue/config'
 
 const app = createApp(App)
 
@@ -23,4 +24,5 @@ app.use(money, { precision: 4 })
 app.use(Vue3Toastify, {
   autoClose: 3000
 } as ToastContainerOptions)
+app.use(PrimeVue)
 app.mount('#app')

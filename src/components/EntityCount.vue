@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import Bus from '@/assets/images/icons/bus-white.svg'
-import Driver from '@/assets/images/icons/bus-white.svg'
+import Driver from '@/assets/images/icons/driver-white.svg'
 import Points from '@/assets/images/icons/point-white.svg'
 
 const { entityName, background, data } = defineProps<{

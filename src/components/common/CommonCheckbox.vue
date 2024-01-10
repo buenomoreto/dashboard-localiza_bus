@@ -48,15 +48,15 @@ function handleCheckbox(event: Event) {
   justify-content: center;
   height: 20px;
   width: 20px;
-  border: 2px solid var(--border-color);
+  border: 2px solid #2BB673;
   background-color: transparent;
-  border-radius: 3px;
+  border-radius: 5px;
   transition: background-color 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .common__checkbox-input:checked + .common__checkbox--checkmark {
-  background-color: var(--border-color);
+  background-color: #2BB673;
 }
 
 .common__checkbox--checkmark:after {
@@ -82,5 +82,8 @@ function handleCheckbox(event: Event) {
   .common__checkbox-input + .common__checkbox--checkmark:hover {
     background-color: var(--border-color);
   }
+}
+.common__checkbox-label {
+  color: #393E46;
 }
 </style>

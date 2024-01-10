@@ -2,9 +2,11 @@
   <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
+        <div class="container__logo">
+          <img src="@/assets/images/logobrand.svg" alt="Localiza Bus" />
+        </div>
         <h1 class="container__title title">
-          Cadastre a <br />
-          sua empresa
+          Crie uma conta
         </h1>
         <form>
           <div class="container__form--flex">
@@ -91,24 +93,7 @@
             </CommonButton>
           </div>
         </form>
-        <div class="container__form-nav">
-          <div>
-            <p class="container__text">Ainda não possui uma conta?</p>
-            <router-link class="link--emphasis" to="/signIn">
-              Entrar agora
-            </router-link>
-          </div>
-          <div>
-            <p class="container__text">Ainda não possui uma conta?</p>
-            <router-link class="link--emphasis" to="/forgot-password">
-              Redefinir senha
-            </router-link>
-          </div>
-        </div>
       </div>
-    </template>
-    <template #contentImage>
-      <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
     </template>
   </LayoutAuth>
 </template>
@@ -122,12 +107,10 @@ import { Company } from '@/ts/interfaces/company'
 import { type } from '@/ts/enum/type'
 import useCompanyService from '@/composables/useCompanyService'
 import useValidateFields from '@/utils/validateFields'
-import { useDevice } from '@/composables/useDevice'
 import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const { windowSize } = useDevice()
 const router = useRouter()
 const { createCompany } = useCompanyService()
 const checked = ref(false)
@@ -148,7 +131,7 @@ function handleInput(field: keyof Company, value: string) {
 
 function handleLogin() {
   loading.value = true
-  if (useValidateFields(payload, windowSize.width)) {
+  if (useValidateFields(payload)) {
     loading.value = false
     return
   }
@@ -172,13 +155,11 @@ function handleLogin() {
 }
 </script>
 <style scoped>
-.container__form--flex:not(:nth-child(3)) {
-  display: flex;
-  gap: 20px;
-}
+
 .container__form-btn--submit {
-  max-width: 350px;
+  max-width: 250px;
   margin: 0 auto;
+  width: 100%;
 }
 .container__form-nav {
   display: flex;
@@ -202,11 +183,23 @@ function handleLogin() {
   margin-bottom: 20px;
 }
 .container__form-checkbox span {
-  font-size: 13px;
+  font-size: 12px;
 }
 @media (max-width: 1023px) {
   .container__form--flex:not(:nth-child(3)) {
     display: block;
   }
+}
+.container__form--center form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 100%;
+}
+.container__form--flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  width: 100%;
 }
 </style>

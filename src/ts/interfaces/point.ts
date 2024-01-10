@@ -1,5 +1,6 @@
 interface Point {
   [key: string]: any
+  id_company: number
   name: string
   latitude: number
   longitude: number

@@ -4,6 +4,7 @@ import { Line } from './line'
 
 interface Bus {
   [key: string]: any
+  name: string
   id_company: number
   model: string
   license_plate: string

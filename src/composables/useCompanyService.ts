@@ -19,12 +19,12 @@ export default function useCompanyService() {
 
   const updateCompany = async (id: number, payload: Company) => {
     const response = await api.put(`/admin/company/${id}`, payload)
-    return response.data
+    return response
   }
 
-  const uploadFile = async (id: number, uplaod: FormData) => {
-    const response = await api.post(`/admin/company/${id}/upload`, uplaod)
-    return response.data
+  const uploadFile = async (id: number, upload: FormData) => {
+    const response = await api.post(`/admin/company/${id}/upload`, upload)
+    return response
   }
 
   const deleteCompany = async (id: number) => {

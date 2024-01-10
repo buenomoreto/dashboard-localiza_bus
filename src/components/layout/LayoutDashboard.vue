@@ -27,26 +27,31 @@ const router = useRouter()
 const useStore = useUserStore()
 const { getCompany } = useCompanyService()
 
-const fetchUser = async () => {
-  await getCompany(user.id)
-    .then(({ data }) => {
-      useStore.setUser(data)
-    })
-    .catch((error) => {
-      console.log('company error', error)
-      router.push({ name: 'Login' })
-    })
+if (!user) {
+  localStorage.removeItem('userLogged')
+  router.push({ name: 'Login' })
+} else {
+  const fetchUser = async () => {
+    await getCompany(user.id)
+      .then(({ data }) => {
+        useStore.setUser(data)
+      })
+      .catch((error) => {
+        console.log('company error', error)
+        router.push({ name: 'Login' })
+      })
+  }
+  fetchUser()
 }
-
-fetchUser()
 </script>
+
 <style scoped>
 .dashboard {
   background-color: #f9fafb;
   display: flex;
   gap: 20px;
   box-shadow: 0px 4px 20px 0px rgba(238, 238, 238, 0.2);
-  height: calc(100vh - 80px);
+  min-height: calc(100vh - 80px);
 }
 .content {
   width: 58%;

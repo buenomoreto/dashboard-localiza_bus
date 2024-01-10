@@ -1,6 +1,6 @@
 <template>
   <nav class="menu">
-    <div class="user" v-if="user">
+    <router-link class="user" v-if="user" to="/dashboard/profile">
       <div class="user-photo">
         <img
           v-if="user.user_photo"
@@ -19,8 +19,15 @@
       </div>
       <div class="user-name">
         {{ user.name }}
+        <div class="user-verified">
+          <img
+            src="@/assets/images/icons/menu/verified.svg"
+            alt="Usuário verificado"
+          />
+          Perfil verificado
+        </div>
       </div>
-    </div>
+    </router-link>
     <SkeletonProfile v-else />
     <ul class="navigation">
       <div>
@@ -102,7 +109,15 @@ async function handleSignOut() {
   border-radius: 100%;
   box-shadow: 0px 10px 15px 0px rgba(43, 182, 115, 0.1);
 }
+.user-photo img {
+  border-radius: 100%;
+}
 .user-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
   color: #222831;
   font-size: 16px;
   font-weight: 700;
@@ -118,6 +133,7 @@ async function handleSignOut() {
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  max-height: 460px;
 }
 .navigation__item,
 .navigation__link {
@@ -138,6 +154,16 @@ async function handleSignOut() {
   border-radius: 100px;
   background: #2bb673;
   opacity: 0;
+}
+.user-verified {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  text-align: center;
+  font-size: 14px;
+  color: #393e46;
+  font-weight: 600;
 }
 @media (min-width: 1023px) {
   .router-link-active,

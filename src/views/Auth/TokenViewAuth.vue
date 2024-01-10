@@ -3,7 +3,6 @@
     <template #contentForm>
       <div class="container__form--center">
         <h1 class="container__form-title title">
-          <img src="@/assets/images/icons/code.svg" alt="" />
           Autentique sua conta
         </h1>
         <p class="container__form-text">
@@ -30,13 +29,9 @@
         </form>
         <div class="container__form-login">
           <router-link class="link--emphasis" to="/singIn"
-            >Não recebeu? Reenvie um novo código</router-link
-          >
+            >Não recebeu? Reenvie um novo código</router-link>
         </div>
       </div>
-    </template>
-    <template #contentImage>
-      <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
     </template>
   </LayoutAuth>
 </template>
@@ -47,12 +42,10 @@ import CommonInputCode from '@/components/common/CommonInputCode.vue'
 import LayoutAuth from '@/components/layout/LayoutAuth.vue'
 import useUserService from '@/composables/useUserService'
 import useValidateFields from '@/utils/validateFields'
-import { useDevice } from '@/composables/useDevice'
 import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const { windowSize } = useDevice()
 const router = useRouter()
 const { tokenVerify } = useUserService()
 const loading = ref(false)
@@ -64,7 +57,7 @@ function handleInput(value: string) {
 
 function handleLogin() {
   loading.value = true
-  if (useValidateFields(payload, windowSize.width)) {
+  if (useValidateFields(payload)) {
     loading.value = false
     return
   }
@@ -89,22 +82,21 @@ function handleLogin() {
 </script>
 <style scoped>
 .container__form-text {
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 35px;
+  color: #393E46;
+  font-size: 14px;
+  line-height: 166.667%;
+  margin-bottom: 20px;
 }
 .container__form-title {
-  margin-bottom: 10px;
-  margin-top: 20px;
+  margin-bottom: 5px;
 }
 
 .container__form-btn--submit {
-  max-width: 150px;
+  max-width: 250px;
 }
 
 .container__form-login {
-  display: grid;
-  place-items: center;
+
   margin-top: 30px;
 }
 </style>

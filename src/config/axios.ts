@@ -6,7 +6,7 @@ import useUserService from '@/composables/useUserService'
 const router = useRouter()
 const { refreshToken } = useUserService()
 const api: AxiosInstance = axios.create({
-  baseURL: 'https://backend-localiza-bus.vercel.app/api',
+  baseURL: 'http://localhost:3000/api',
   headers: {
     Accept: 'application/json'
   }
@@ -47,6 +47,7 @@ api.interceptors.response.use(
           return api(originalRequest)
         } catch (err) {
           console.error('Erro ao atualizar o token', err)
+          localStorage.removeItem('userLogged')
           router.push('/login')
         }
       }

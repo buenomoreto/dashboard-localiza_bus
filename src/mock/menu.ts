@@ -1,7 +1,7 @@
 import Dashboard from '@/assets/images/icons/menu/dashboard.svg'
 import Bus from '@/assets/images/icons/menu/bus.svg'
-import Driver from '@/assets/images/icons/menu/bus.svg'
-import Points from '@/assets/images/icons/menu/point.svg'
+import Driver from '@/assets/images/icons/menu/driver.svg'
+import Config from '@/assets/images/icons/menu/config.svg'
 
 export const menu = [
   {
@@ -20,8 +20,8 @@ export const menu = [
     path: '/driver'
   },
   {
-    label: 'Pontos',
-    icon: Points,
-    path: '/point'
+    label: 'Configurações',
+    icon: Config,
+    path: '/dashboard/config'
   }
 ]

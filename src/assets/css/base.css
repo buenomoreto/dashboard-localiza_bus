@@ -127,6 +127,7 @@ body {
   --bg-success: #2bb673;
   --bg-warning: #ffb120;
   --inactive-color: #8d8d8d;
+  --toastify-toast-width: 400px !important;
 }
 
 ::selection {

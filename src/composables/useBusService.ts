@@ -2,22 +2,23 @@ import { api } from '@/config/axios'
 import { Bus } from '@/ts/interfaces/bus'
 
 export default function useBusService() {
-  const createBus = async (payload: Bus) => {
-    const response = await api.post('/admin/bus/', payload)
+  const createBus = async (companyId: number, busId: number, payload: Bus) => {
+    const response = await api.post(`/admin/company/${companyId}/bus`, payload)
     return response
   }
 
-  const getBus = async (id: number) => {
-    const response = await api.get(`/admin/bus/${id}`)
+  const getBus = async (companyId: number, busId: number) => {
+    const response = await api.get(`/admin/company/${companyId}/bus/${busId}`)
     return response
   }
 
   const getAllBus = async (
+    companyId: number,
     color?: string,
     recent?: boolean,
     limit: number = 10,
     offset: number = 0
-  ): Promise<any> => {
+  ): Promise<Bus[]> => {
     const params = new URLSearchParams()
 
     if (color) {
@@ -31,19 +32,24 @@ export default function useBusService() {
     params.append('limit', limit.toString())
     params.append('offset', offset.toString())
 
-    const url = `/admin/bus?${params.toString()}`
+    const url = `/admin/company/${companyId}/bus?${params.toString()}`
 
     const { data } = await api.get(url)
     return data
   }
 
-  const updateBus = async (id: number, payload: Bus) => {
-    const response = await api.put(`/admin/bus/${id}`, payload)
+  const updateBus = async (companyId: number, busId: number, payload: Bus) => {
+    const response = await api.put(
+      `/admin/company/${companyId}/bus/${busId}`,
+      payload
+    )
     return response.data
   }
 
-  const deleteBus = async (id: number) => {
-    const response = await api.delete(`/admin/bus/${id}`)
+  const deleteBus = async (companyId: number, busId: number) => {
+    const response = await api.delete(
+      `/admin/company/${companyId}/bus/${busId}`
+    )
     return response
   }
 

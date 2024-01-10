@@ -3,12 +3,13 @@ import { History } from '@/ts/interfaces/history'
 
 export default function useHistoryService() {
   const getAllHistory = async (
+    companyId: number,
     startDate: string,
     limit: number,
     offset: number
   ) => {
     const response = await api.get(
-      `/admin/history?startDate=${startDate}&limit=${limit}&offset=${offset}`
+      `/admin/company/${companyId}/history?startDate=${startDate}&limit=${limit}&offset=${offset}`
     )
 
     return response.data.map((item: History) => ({

@@ -63,6 +63,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import { toast } from 'vue3-toastify'
 import moment from 'moment'
 import LayoutDashboard from '@/components/layout/LayoutDashboard.vue'
 import EntityCount from '@/components/EntityCount.vue'
@@ -73,6 +74,7 @@ import useBusService from '@/composables/useBusService'
 import useDriverService from '@/composables/useDriverService'
 import usePointService from '@/composables/usePointService'
 import useHistoryService from '@/composables/useHistoryService'
+import { Bus } from '@/ts/interfaces/bus'
 
 const { getAllBus } = useBusService()
 const { getAllDriver } = useDriverService()
@@ -82,20 +84,26 @@ const { getAllHistory } = useHistoryService()
 const currentDate = moment().startOf('day').toDate()
 const attrs = ref([{ dates: currentDate }])
 const loading = ref(true)
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
-let busData = ref([])
+let busData = ref<Bus[]>([])
 let driverData = ref([])
 let pointData = ref([])
 let historyData = ref([])
-let selectedDate = ref(moment(currentDate).format('D [de] MMMM [de] YYYY'))
+
+function formatDate(date: Date) {
+  return moment(date).format('D [de] MMMM [de] YYYY')
+}
+
+let selectedDate = ref(formatDate(currentDate))
 
 const handleDate = async (date: any) => {
   try {
-    selectedDate.value = moment(date.id).format('D [de] MMMM [de] YYYY')
-    historyData.value = await getAllHistory(date.id, 8, 0)
+    selectedDate.value = formatDate(date.id)
+    historyData.value = await getAllHistory(user.id, date.id, 8, 0)
   } catch (error) {
     console.error('History error:', error)
-  } finally {
+  } finally { 
     loading.value = false
   }
 }
@@ -103,10 +111,10 @@ const handleDate = async (date: any) => {
 const fetchData = async () => {
   try {
     const [bus, driver, point, history] = await Promise.all([
-      getAllBus(),
-      getAllDriver(),
-      getAllPoint(),
-      getAllHistory(currentDate.toISOString(), 8, 0)
+      getAllBus(user.id),
+      getAllDriver(user.id),
+      getAllPoint(user.id),
+      getAllHistory(user.id, currentDate.toISOString().split('T')[0], 30, 0)
     ])
 
     busData.value = bus
@@ -120,14 +128,33 @@ const fetchData = async () => {
   }
 }
 
-fetchData()
+function alertIncompleteRegisters() {
+  let incompleteMessages: any = []
+
+  busData.value.forEach((bus: any) => {
+    let message = `Ônibus ${bus.name} possui campos incompleto: `
+
+    let incompleteFields = []
+    if (bus.line == null) incompleteFields.push('Linha')
+    if (bus.point.length === 0) incompleteFields.push('Ponto')
+    if (bus.driver == null) incompleteFields.push('Motorista')
+
+    if (incompleteFields.length) {
+      incompleteMessages.push(message + incompleteFields.join(', '))
+    }
+  })
+
+  incompleteMessages.forEach((msg: string) => {
+    toast.warning(msg, {
+      position: toast.POSITION.BOTTOM_RIGHT
+    })
+  })
+}
+fetchData().then(alertIncompleteRegisters)
 </script>
 
 <style scoped>
 h1 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #222831;
   margin-bottom: 25px;
 }
 .container-entity-count {

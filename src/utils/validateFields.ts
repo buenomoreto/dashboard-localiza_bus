@@ -23,10 +23,7 @@ type paramsTypes =
   | Bus
   | Review
 
-export default function useValidateFields(
-  params: paramsTypes,
-  screenWidth: number
-): boolean {
+export default function useValidateFields(params: paramsTypes): boolean {
   const missingFields: string[] = []
 
   for (const field in params) {
@@ -36,18 +33,12 @@ export default function useValidateFields(
   }
 
   if (missingFields.length > 0) {
-    if (screenWidth > 1024) {
-      missingFields.forEach((missingField) => {
-        const errorMessage = `Preencha o campo obrigatório: ${translates[missingField]}`
-        toast.error(errorMessage, {
-          position: toast.POSITION.BOTTOM_LEFT
-        })
+    missingFields.forEach((missingField) => {
+      const errorMessage = `Preencha o campo obrigatório: ${translates[missingField]}`
+      toast.error(errorMessage, {
+        position: toast.POSITION.BOTTOM_LEFT
       })
-    } else {
-      toast.error('Preencha os campos obrigatórios', {
-        position: toast.POSITION.BOTTOM_CENTER
-      })
-    }
+    })
     return true
   }
 

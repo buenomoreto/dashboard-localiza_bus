@@ -4,6 +4,9 @@
   display: flex;
   height: 100vh;
   flex-direction: row;
+  position: relative;
+  transition: transform 0.5s;
+  background: #F5FAF9;
 }
 
 .row {
@@ -16,13 +19,13 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  background: var(--bg-color);
+  background: #F5FAF9;
   position: relative;
   overflow: hidden;
 }
 
 .container__form--center {
-  max-width: 500px;
+  max-width: 430px;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -43,17 +46,9 @@
 }
 
 .title {
-  font-size: 35px;
-  color: var(--font-color);
-  margin-bottom: 40px;
-}
-.title::before {
-  content: '';
-  width: 50px;
-  height: 5px;
-  background: var(--border-color);
-  display: block;
-  margin-bottom: 10px;
+  font-size: 22px;
+  color: #222831;
+  margin-bottom: 20px;
 }
 
 .link--emphasis {
@@ -123,4 +118,17 @@
 }
 .vc-arrow svg {
   stroke: #2bb673;
+}
+
+h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #222831;
+  text-transform: initial;
+  margin-bottom: 10px;
+}
+
+.container__logo {
+  text-align: center;
+  margin-bottom: 25px;
 }

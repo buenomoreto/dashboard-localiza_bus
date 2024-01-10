@@ -26,7 +26,7 @@
           <div class="history-item__message" v-html="h.message"></div>
         </div>
       </template>
-      <template v-if="!history.length">
+      <template v-if="!loading && history.length == 0">
         Nenhuma atividade registrada para hoje
       </template>
     </div>
@@ -37,6 +37,7 @@
 import { ref, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
 import SkeletonModificationHistory from './skeletons/SkeletonModificationHistory.vue'
+
 const { date, history, loading } = defineProps<{
   date: string
   history: any[]
@@ -50,6 +51,9 @@ watch(useStore, (newValue) => {
 })
 </script>
 <style scoped>
+.user-photo img {
+  border-radius: 100%;
+}
 .content {
   width: 100%;
   margin-top: 30px;
@@ -70,7 +74,7 @@ watch(useStore, (newValue) => {
 }
 @media (min-width: 1366px) {
   .history-items.expand {
-    height: 415px;
+    height: 430px;
     overflow: auto;
   }
 }

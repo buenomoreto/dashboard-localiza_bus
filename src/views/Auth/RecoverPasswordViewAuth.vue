@@ -11,7 +11,7 @@
           <CommonInput
             @change="handleInput"
             type="password"
-            entryType="senha"
+            entryType="password"
             placeholder="Digite a sua nova senha*"
           >
             <template #icon>
@@ -22,7 +22,7 @@
             @change="handleInput"
             type="password"
             entryType="confirmPassword"
-            placeholder="Confirme a senha*"
+            placeholder="Confirme a sua nova senha*"
           >
             <template #icon>
               <img src="@/assets/images/icons/password.svg" alt="" />
@@ -38,9 +38,6 @@
         </form>
       </div>
     </template>
-    <template #contentImage>
-      <img src="@/assets/images/bg/bg-company.png" width="1090" alt="" />
-    </template>
   </LayoutAuth>
 </template>
 
@@ -51,12 +48,10 @@ import LayoutAuth from '@/components/layout/LayoutAuth.vue'
 import useUserService from '@/composables/useUserService'
 import useValidateFields from '@/utils/validateFields'
 import type { AccessCredentials } from '@/ts/interfaces/user'
-import { useDevice } from '@/composables/useDevice'
 import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-const { windowSize } = useDevice()
 const route = useRoute()
 const router = useRouter()
 const { updatePassword } = useUserService()
@@ -87,7 +82,7 @@ function handleLogin() {
     return
   }
 
-  if (useValidateFields({ password, confirmPassword }, windowSize.width)) {
+  if (useValidateFields({ password, confirmPassword })) {
     loading.value = false
     return
   }
@@ -112,9 +107,10 @@ function handleLogin() {
 </script>
 <style scoped>
 .container__form-text {
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 35px;
+  color: #393E46;
+  font-size: 14px;
+  line-height: 166.667%;
+  margin-bottom: 20px;
 }
 .container__form-title {
   margin-bottom: 10px;
@@ -122,13 +118,19 @@ function handleLogin() {
 }
 
 .container__form-btn--submit {
-  max-width: 350px;
-  margin: 0 auto;
+  max-width: 250px;
+  width: 100%;
+  margin-top: 15px;
 }
 
 .container__form-login {
   display: grid;
   place-items: center;
   margin-top: 30px;
+}
+.container__form--center form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 </style>

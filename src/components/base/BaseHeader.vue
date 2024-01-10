@@ -1,18 +1,27 @@
 <template>
   <header class="header">
-    <div class="logo">logo</div>
+    <div class="logo">
+      <router-link to="/">
+        <img
+          src="@/assets/images/new-logo.svg"
+          width="200"
+          height="30"
+          alt=""
+        />
+      </router-link>
+    </div>
     <div class="search">
       <CommonSearch />
-      <CommonButtonDash class="button">
+      <CommonLinkDash class="button">
         <template #label> Cadastrar novo ônibus </template>
-      </CommonButtonDash>
+      </CommonLinkDash>
     </div>
     <div class="user"></div>
   </header>
 </template>
 
 <script setup lang="ts">
-import CommonButtonDash from '../common/CommonButtonDash.vue'
+import CommonLinkDash from '../common/CommonLinkDash.vue'
 import CommonSearch from '../common/CommonSearch.vue'
 CommonSearch
 </script>

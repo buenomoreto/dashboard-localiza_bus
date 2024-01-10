@@ -26,10 +26,9 @@ function handleClick(event: Event) {
   place-items: center;
 }
 .common__button__inner {
-  color: var(--font-color);
-  background: var(--bg-gradient);
-  font-size: 20px;
-  text-transform: uppercase;
+  color: #fff;
+  background: #2BB673;
+  font-size: 14px;
   min-height: 50px;
   border-radius: 25px;
   font-weight: bold;
@@ -47,7 +46,6 @@ function handleClick(event: Event) {
 @media (min-width: 1023px) {
   .common__button__inner:hover {
     transform: scale(1.05);
-    background: var(--bg-gradient-hover);
     transition:
       transform 0.2s ease-in-out,
       background 0.2s ease-in-out;

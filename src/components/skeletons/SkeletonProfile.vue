@@ -3,6 +3,7 @@
     <div class="user__photo loading" />
     <div class="user__info loading">
       <p class="user__name loading" />
+      <p class="user__verified loading" />
     </div>
   </div>
 </template>
@@ -23,6 +24,12 @@
 .user__name {
   text-align: center;
   width: 100px;
+  height: 16px;
+  margin-bottom: 5px;
+}
+.user__verified {
+  text-align: center;
+  width: 130px;
   height: 16px;
 }
 </style>
