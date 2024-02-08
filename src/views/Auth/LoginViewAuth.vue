@@ -50,9 +50,9 @@ import CommonButton from '@/components/common/CommonButton.vue'
 import CommonCheckbox from '@/components/common/CommonCheckbox.vue'
 import CommonInput from '@/components/common/CommonInput.vue'
 import LayoutAuth from '@/components/layout/LayoutAuth.vue'
-import { UserCredentials } from '@/ts/interfaces/user'
 import useUserService from '@/composables/useUserService'
 import useValidateFields from '@/utils/validateFields'
+import { UserCredentials } from '@/ts/interfaces/user'
 import { toast } from 'vue3-toastify'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -93,7 +93,6 @@ async function handleLogin() {
     })
     .catch(({ response }) => {
       loading.value = false
-
       if (typeof response.data.message === 'string') {
         toast.error(response.data.message, {
           position: toast.POSITION.BOTTOM_LEFT

@@ -13,7 +13,7 @@
       <template v-else>
         <h1>Bem-vindo!</h1>
         <p>Entre na sua conta, gerencie e<br> monitore sua frota de veículos!</p>
-        <router-link :to="formClass">Criar conta</router-link>
+        <router-link :to="formClass">Entrar</router-link>
       </template>
     </section>
   </main>

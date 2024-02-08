@@ -25,6 +25,7 @@ const regexPatterns: Record<string, string> = {
   cnpj: '##.###.###/####-##',
   phone_number: '(##) #####-####',
   license_plate: 'AAA-####',
+  postal_code: '#####-###',
   color: '######'
 }
 

@@ -26,5 +26,8 @@ export const translates: { [key: string]: string } = {
   point: 'ponto',
   bus: 'ônibus',
   color: 'cor',
-  id_bus: 'Nenhum ônibus cadastado'
+  id_bus: 'Nenhum ônibus cadastado',
+  latitude: 'latitude',
+  longitude: 'longitude',
+  cpf: 'cpf'
 }

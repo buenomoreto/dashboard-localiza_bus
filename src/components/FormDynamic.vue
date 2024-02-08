@@ -13,10 +13,8 @@
           :key="field.placeholder"
           :class="[field.entryType]"
         >
-          <label 
-            :for="field.placeholder"
-          >
-          {{ field.label }}
+          <label :for="field.placeholder">
+            {{ field.label }}
           </label>
           <template v-if="field.type !== 'checkbox'">
             <CommonInput
@@ -85,8 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref, watch, reactive } from 'vue'
 import { Bus } from '@/ts/interfaces/bus'
 import { Driver } from '@/ts/interfaces/driver'
 import { Line } from '@/ts/interfaces/line'
@@ -96,28 +93,17 @@ import CommonInput from './common/CommonInput.vue'
 import CommonInputPrice from './common/CommonInputPrice.vue'
 import CommonInputRegex from './common/CommonInputRegex.vue'
 import CommonSwitch from './common/CommonSwitch.vue'
-import useBusService from '@/composables/useBusService'
 import CommonInputColor from './common/CommonInputColor.vue'
 import CommonInputHours from './common/CommonInputHours.vue'
 import CommonMap from './common/CommonMap.vue'
 
 type AllEntities = Bus & Driver & Line & Point & Company
 
-const { entities } = defineProps<{
-  entities: any[]
-}>()
+const props = defineProps<{entities: any[]}>()
+const emit  = defineEmits(['data'])
+const payload = ref()
 
-const emit = defineEmits(['data'])
-const route = useRoute()
-const { getAllBus } = useBusService()
-const id_bus = ref()
-const payload = ref<AllEntities>({} as AllEntities)
-
-if (route.params.id && route.params.id.length) {
-  id_bus.value = route.params.id
-}
-
-const entityPayload: any = {
+const entityPayload: any = reactive({
   bus: {
     name: '',
     model: '',
@@ -127,19 +113,13 @@ const entityPayload: any = {
     operational_status: false
   },
   driver: {
-    id_bus,
     name: '',
     email: '',
     cpf: '',
     phone_number: '',
-    password: '',
-    type: 'driver',
-    user_photo: '',
-    latitude: 0,
-    longitude: 0
+    type: 'driver'
   },
   point: {
-    id_bus,
     name: '',
     latitude: 0,
     longitude: 0,
@@ -151,26 +131,34 @@ const entityPayload: any = {
     hours: 0
   },
   line: {
-    id_bus,
     name: '',
     color: ''
+  },
+  company: {
+    name: '',
+    email: '',
+    cnpj: '',
+    phone_number: '',
+    owner: '',
+    password: '',
+    user_photo: '',
   }
-}
+})
 
 function updatePayload() {
-  const activeEntity = entities.find((entity) => entity.active)
+  const activeEntity = props.entities.find((entity) => entity.active)
   if (activeEntity && entityPayload[activeEntity.name]) {
-    payload.value = entityPayload[activeEntity.name] as AllEntities
+    payload.value = entityPayload[activeEntity.name] 
   }
+  emit('data', payload.value)
 }
 
-updatePayload()
+updatePayload();
 
-watch(entities, updatePayload)
+watch(props.entities, updatePayload, { deep: true })
 
 function handlePayload(field: keyof AllEntities, value: string) {
   payload.value[field] = value
-  emit('data', payload.value)
 }
 </script>
 
@@ -220,6 +208,9 @@ label {
 }
 .state {
   width: 140px;
+}
+.point .name, .reference {
+  width: 100%;
 }
 
 </style>

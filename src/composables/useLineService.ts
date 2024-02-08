@@ -1,9 +1,10 @@
 import { api } from '@/config/axios'
 import { Line } from '@/ts/interfaces/line'
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 export default function useLineService() {
   const createLine = async (
-    companyId: number,
+    companyId = user.id,
     busId: number,
     payload: Line
   ) => {
@@ -14,18 +15,18 @@ export default function useLineService() {
     return response
   }
 
-  const getLine = async (companyId: number, lineId: number) => {
+  const getLine = async (companyId = user.id, lineId: number) => {
     const response = await api.get(`/admin/company/${companyId}/line/${lineId}`)
     return response
   }
 
-  const getAllLine = async (companyId: number) => {
+  const getAllLine = async (companyId = user.id) => {
     const response = await api.get(`/admin/company/${companyId}/line`)
     return response.data
   }
 
   const updateLine = async (
-    companyId: number,
+    companyId = user.id,
     busId: number,
     lineId: number,
     payload: Line
@@ -37,7 +38,7 @@ export default function useLineService() {
     return response.data
   }
 
-  const deleteLine = async (companyId: number, lineId: number) => {
+  const deleteLine = async (companyId = user.id, lineId: number) => {
     const response = await api.delete(
       `/admin/company/${companyId}/line/${lineId}`
     )

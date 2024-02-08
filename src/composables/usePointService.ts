@@ -1,9 +1,10 @@
 import { api } from '@/config/axios'
 import { Point } from '@/ts/interfaces/point'
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 export default function usePointService() {
   const createPoint = async (
-    companyId: number,
+    companyId = user.id,
     busId: number,
     payload: Point
   ) => {
@@ -14,20 +15,20 @@ export default function usePointService() {
     return response
   }
 
-  const getPoint = async (companyId: number, pointId: number) => {
+  const getPoint = async (companyId = user.id, pointId: number) => {
     const response = await api.get(
       `/admin/company/${companyId}/point/${pointId}`
     )
     return response
   }
 
-  const getAllPoint = async (companyId: number) => {
+  const getAllPoint = async (companyId = user.id) => {
     const response = await api.get(`/admin/company/${companyId}/point`)
     return response.data
   }
 
   const updatePoint = async (
-    companyId: number,
+    companyId = user.id,
     busId: number,
     pointId: number,
     payload: Point
@@ -39,7 +40,7 @@ export default function usePointService() {
     return response.data
   }
 
-  const deletePoint = async (companyId: number, pointId: number) => {
+  const deletePoint = async (companyId = user.id, pointId: number) => {
     const response = await api.delete(
       `/admin/company/${companyId}/point/${pointId}`
     )

@@ -21,28 +21,20 @@ import SidebarMenu from '@/components/SidebarMenu.vue'
 import BaseHeader from '../base/BaseHeader.vue'
 import { useRoute } from 'vue-router'
 
-const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 const route = useRoute()
 const router = useRouter()
 const useStore = useUserStore()
 const { getCompany } = useCompanyService()
 
-if (!user) {
-  localStorage.removeItem('userLogged')
-  router.push({ name: 'Login' })
-} else {
-  const fetchUser = async () => {
-    await getCompany(user.id)
-      .then(({ data }) => {
-        useStore.setUser(data)
-      })
-      .catch((error) => {
-        console.log('company error', error)
-        router.push({ name: 'Login' })
-      })
-  }
-  fetchUser()
+const fetchUser = async () => {
+  await getCompany(undefined)
+    .then(({ data }: any) => {
+      useStore.setUser(data)
+    }).catch((_) => {
+      router.push({ name: 'Login' })
+    })
 }
+fetchUser()
 </script>
 
 <style scoped>
