@@ -14,12 +14,6 @@ export const useAuthStore = defineStore('auth', {
       Object.assign(this, user)
       localStorage.setItem('userLogged', JSON.stringify(user))
     },
-    loadTokens() {
-      const user = JSON.parse(localStorage.getItem('userLogged') as string)
-      if (user) {
-        Object.assign(this, user)
-      }
-    },
     clearTokens() {
       this.accessToken = ''
       this.refreshToken = ''

@@ -1,9 +1,8 @@
 import { UserCredentials, AccessCredentials } from '@/ts/interfaces/user'
 import { api } from '@/config/axios'
-import { useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
+import router from '@/router'
 
-const router = useRouter()
 export default function useUserService() {
 
   const signIn = async (user: UserCredentials) => {

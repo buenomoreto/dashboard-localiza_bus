@@ -1,15 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import DashboardView from '@/views/DashboardView.vue'
-import DashboardListing from '@/views/DashboardListingView.vue'
-import DashboardEditing from '@/views/DashboardEditingView.vue'
-import DashboardCreation from '@/views/DashboardCreationView.vue'
-import LoginViewAuth from '@/views/Auth/LoginViewAuth.vue'
-import ForgotPasswordViewAuth from '@/views/Auth/ForgotPasswordViewAuth.vue'
-import RegisterViewAuth from '@/views/Auth/RegisterViewAuth.vue'
-import TokenViewAuth from '@/views/Auth/TokenViewAuth.vue'
-import RecoverPasswordViewAuth from '@/views/Auth/RecoverPasswordViewAuth.vue'
-import DashboardConfigVieW from '@/views/DashboardConfigView.vue'
-import DashboardProfileView from '@/views/DashboardProfileView.vue'
+
+const DashboardView = () => import('@/views/DashboardView.vue')
+const DashboardListing = () => import('@/views/DashboardListingView.vue')
+const DashboardEditing = () => import('@/views/DashboardEditingView.vue')
+const DashboardCreation = () => import('@/views/DashboardCreationView.vue')
+const LoginViewAuth = () => import('@/views/Auth/LoginViewAuth.vue')
+const ForgotPasswordViewAuth = () => import('@/views/Auth/ForgotPasswordViewAuth.vue')
+const RegisterViewAuth = () => import('@/views/Auth/RegisterViewAuth.vue')
+const TokenViewAuth = () => import('@/views/Auth/TokenViewAuth.vue')
+const RecoverPasswordViewAuth = () => import('@/views/Auth/RecoverPasswordViewAuth.vue')
+const DashboardConfigView = () => import('@/views/DashboardConfigView.vue')
+const DashboardProfileView = () => import('@/views/DashboardProfileView.vue')
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -67,7 +68,7 @@ const router = createRouter({
     {
       path: '/dashboard/config',
       name: 'Config',
-      component: DashboardConfigVieW
+      component: DashboardConfigView
     },
     {
       path: '/dashboard/profile',

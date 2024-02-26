@@ -91,19 +91,8 @@ async function handleLogin() {
         path: '/'
       })
     })
-    .catch(({ response }) => {
+    .catch(() => {
       loading.value = false
-      if (typeof response.data.message === 'string') {
-        toast.error(response.data.message, {
-          position: toast.POSITION.BOTTOM_LEFT
-        })
-      } else {
-        response.data.message.forEach(({ msg }: any) => {
-          toast.error(msg, {
-            position: toast.POSITION.BOTTOM_LEFT
-          })
-        })
-      }
     })
 }
 

@@ -100,10 +100,6 @@ function handleDelete() {
       toast.success(response.message, {
         position: toast.POSITION.BOTTOM_RIGHT
       })
-    }).catch(({ response }: any) => {
-      toast.error(response.data.message, {
-        position: toast.POSITION.BOTTOM_RIGHT
-      })
     }).finally(() => {
       setTimeout(() => {
         router.go(0)

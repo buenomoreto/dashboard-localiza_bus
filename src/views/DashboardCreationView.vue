@@ -376,19 +376,7 @@ function handleCreation() {
       toast.success(response.message, {
         position: toast.POSITION.BOTTOM_RIGHT
       })
-    }).catch(({ response }: any) => {
-      if (typeof response.data.message === 'string') {
-        toast.error(response.data.message, {
-          position: toast.POSITION.BOTTOM_RIGHT
-        })
-      } else {
-        response.data.message.forEach(({ msg }: any) => {
-          toast.error(msg, {
-            position: toast.POSITION.BOTTOM_RIGHT
-          })
-        })
-      }
-    })
+    });
 }
 
 function handleCancel(): void {

@@ -9,6 +9,7 @@ import { Bus } from '@/ts/interfaces/bus'
 import { Review } from '@/ts/interfaces/review'
 import { UserCredentials } from '@/ts/interfaces/user'
 import { AccessCredentials } from '@/ts/interfaces/user'
+
 interface Email {
   [key: string]: any
   email: string
@@ -24,6 +25,13 @@ type paramsTypes =
   | Bus
   | Review
 
+const positionMapping: { [key: string]: ToastPosition } = {
+  bottom_left: toast.POSITION.BOTTOM_LEFT,
+  bottom_right: toast.POSITION.BOTTOM_RIGHT,
+  top_left: toast.POSITION.TOP_LEFT,
+  top_right: toast.POSITION.TOP_RIGHT,
+};
+  
 export default function useValidateFields(params: paramsTypes, position = 'bottom_left' as ToastPosition): boolean {
   const missingFields: string[] = []
   
@@ -36,7 +44,8 @@ export default function useValidateFields(params: paramsTypes, position = 'botto
   if (missingFields.length > 0) {
     missingFields.forEach((missingField) => {
       const errorMessage = `Preencha o campo obrigatório: ${translates[missingField]}`
-      toast.error(errorMessage, { position })
+      const toastPosition = positionMapping[position];
+      toast.error(errorMessage, {position:toastPosition})
     })
     return true
   }
