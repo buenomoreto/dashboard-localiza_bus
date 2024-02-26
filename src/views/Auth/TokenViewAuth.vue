@@ -2,9 +2,7 @@
   <LayoutAuth>
     <template #contentForm>
       <div class="container__form--center">
-        <h1 class="container__form-title title">
-          Autentique sua conta
-        </h1>
+        <h1 class="container__form-title title">Autentique sua conta</h1>
         <p class="container__form-text">
           Por favor, confirme sua conta digitando o código de autorização
           enviado para o seu e-mail.
@@ -29,7 +27,8 @@
         </form>
         <div class="container__form-login">
           <router-link class="link--emphasis" to="/singIn"
-            >Não recebeu? Reenvie um novo código</router-link>
+            >Não recebeu? Reenvie um novo código</router-link
+          >
         </div>
       </div>
     </template>
@@ -82,7 +81,7 @@ function handleLogin() {
 </script>
 <style scoped>
 .container__form-text {
-  color: #393E46;
+  color: #393e46;
   font-size: 14px;
   line-height: 166.667%;
   margin-bottom: 20px;
@@ -96,7 +95,6 @@ function handleLogin() {
 }
 
 .container__form-login {
-
   margin-top: 30px;
 }
 </style>

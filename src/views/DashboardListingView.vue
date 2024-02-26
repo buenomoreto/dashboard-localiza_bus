@@ -28,7 +28,12 @@
             :item="item"
           >
             <template #image>
-              <div class="icon-bus" :style="{ background: item.line ? item.line.color+26 : '#2BB673'}" >
+              <div
+                class="icon-bus"
+                :style="{
+                  background: item.line ? item.line.color + 26 : '#2BB673'
+                }"
+              >
                 <svg
                   width="20"
                   height="20"
@@ -57,7 +62,11 @@
               {{ item.license_plate || item.cpf }}
             </template>
             <template #sub-name-optional>
-              <span v-if="item.line" :style="{ background: item.line.color}" class="before-line" />
+              <span
+                v-if="item.line"
+                :style="{ background: item.line.color }"
+                class="before-line"
+              />
               {{ item.line ? 'Linha ' + item.line.name : item.phone_number }}
             </template>
           </Listing>
@@ -96,16 +105,17 @@ async function fetchData() {
   listing.value = await getAll(user.id, name.value)
 }
 
-
-watch(() => route.path, (newPath) => {
-  name.value = extractName(newPath)
-  fetchData()
-})
+watch(
+  () => route.path,
+  (newPath) => {
+    name.value = extractName(newPath)
+    fetchData()
+  }
+)
 
 fetchData()
 
-console.log('entrou');
-
+console.log('entrou')
 </script>
 <style scoped>
 .content-top {
@@ -159,7 +169,6 @@ console.log('entrou');
   justify-content: center;
   align-items: center;
 }
-
 </style>
 <style>
 .before-line {

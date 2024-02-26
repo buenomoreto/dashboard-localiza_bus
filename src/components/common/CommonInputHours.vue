@@ -12,7 +12,12 @@
       :value="inputValue"
       class="common__input"
     />
-    <button v-if="index !== 0" type="button" @click="removeInput(index)" class="remove-button">
+    <button
+      v-if="index !== 0"
+      type="button"
+      @click="removeInput(index)"
+      class="remove-button"
+    >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="21"
@@ -28,8 +33,13 @@
         />
       </svg>
     </button>
-    <button v-if="index == 0" type="button" @click="addInput" class="add-button">
-      <img src="@/assets/images/icons/add.svg" alt="">
+    <button
+      v-if="index == 0"
+      type="button"
+      @click="addInput"
+      class="add-button"
+    >
+      <img src="@/assets/images/icons/add.svg" alt="" />
     </button>
   </div>
 </template>

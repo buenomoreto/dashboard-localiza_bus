@@ -4,7 +4,6 @@ import { toast } from 'vue3-toastify'
 import router from '@/router'
 
 export default function useUserService() {
-
   const signIn = async (user: UserCredentials) => {
     const response = await api.post('/user/signIn', user)
     return response

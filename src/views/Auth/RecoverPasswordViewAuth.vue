@@ -107,7 +107,7 @@ function handleLogin() {
 </script>
 <style scoped>
 .container__form-text {
-  color: #393E46;
+  color: #393e46;
   font-size: 14px;
   line-height: 166.667%;
   margin-bottom: 20px;

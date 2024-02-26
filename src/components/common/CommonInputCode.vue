@@ -83,7 +83,6 @@ const handleInput = (index: number) => {
 }
 .common__input__code__box:hover {
   border: 1px solid #2bb673;
-
 }
 .common__input__code input::placeholder {
   color: var(--font-color);

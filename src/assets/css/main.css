@@ -6,7 +6,7 @@
   flex-direction: row;
   position: relative;
   transition: transform 0.5s;
-  background: #F5FAF9;
+  background: #f5faf9;
 }
 
 .row {
@@ -19,7 +19,7 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  background: #F5FAF9;
+  background: #f5faf9;
   position: relative;
   overflow: hidden;
 }

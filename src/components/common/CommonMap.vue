@@ -7,7 +7,11 @@
           layer-type="base"
           name="OpenStreetMap"
         ></l-tile-layer>
-        <l-marker v-if="markerPosition" :lat-lng="markerPosition" :icon="pointIcon"></l-marker>
+        <l-marker
+          v-if="markerPosition"
+          :lat-lng="markerPosition"
+          :icon="pointIcon"
+        ></l-marker>
       </l-map>
     </div>
   </div>

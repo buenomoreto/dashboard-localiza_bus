@@ -39,20 +39,19 @@ export default function useDynamicService() {
     id?: number,
     entity?: string
   ): Promise<any> => {
-    let url = `/admin/company/${companyId}/${name}`;
-    
+    let url = `/admin/company/${companyId}/${name}`
+
     if (id != null) {
-      url += `/${id}`;
+      url += `/${id}`
     }
-  
+
     if (entity != null && entity != 'bus') {
-      url += `/${entity}`;
+      url += `/${entity}`
     }
-    
-    const response = await api.post(url, payload);
-    return response;
-  };
-  
+
+    const response = await api.post(url, payload)
+    return response
+  }
 
   const destroy = async (
     companyId: number,

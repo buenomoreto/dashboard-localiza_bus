@@ -101,7 +101,7 @@ const handleDate = async (date: any) => {
     selectedDate.value = formatDate(date.id)
     historyData.value = await getAllHistory(user.id, date.id, 8, 0)
   } catch (_) {
-  } finally { 
+  } finally {
     loading.value = false
   }
 }

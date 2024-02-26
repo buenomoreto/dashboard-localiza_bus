@@ -5,9 +5,7 @@
         <div class="container__logo">
           <img src="@/assets/images/logobrand.svg" alt="Localiza Bus" />
         </div>
-        <h1 class="container__title title">
-          Crie uma conta
-        </h1>
+        <h1 class="container__title title">Crie uma conta</h1>
         <form>
           <div class="container__form--flex">
             <CommonInput
@@ -156,7 +154,6 @@ function handleLogin() {
 }
 </script>
 <style scoped>
-
 .container__form-btn--submit {
   max-width: 250px;
   margin: 0 auto;

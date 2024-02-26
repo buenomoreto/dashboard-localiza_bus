@@ -2,7 +2,11 @@
   <LayoutDashboard>
     <template #content>
       <div class="content-top" v-if="company">
-        <UploadFile :photo="company.user_photo" :owner="company.owner" @file="handleFileUpload" />
+        <UploadFile
+          :photo="company.user_photo"
+          :owner="company.owner"
+          @file="handleFileUpload"
+        />
         <div class="user-name">
           {{ company.name }}
           <div class="user-verified">
@@ -15,15 +19,12 @@
         </div>
       </div>
       <div class="content-form">
-        <Form 
-          :key="JSON.stringify(entity)" 
-          @data="handleData" 
-          :entities="entity" 
+        <Form
+          :key="JSON.stringify(entity)"
+          @data="handleData"
+          :entities="entity"
         />
-        <CommonButton
-          class="active"
-          @click-event="() => updateToCompany()"
-        >
+        <CommonButton class="active" @click-event="() => updateToCompany()">
           <template #label> Enviar </template>
         </CommonButton>
       </div>
@@ -50,13 +51,13 @@ const entity = ref([{}])
 const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 const handleFileUpload = async (file: any) => {
-  
   uploadFile(user.id, file)
     .then(({ message }: any) => {
       toast.success(message, {
         position: toast.POSITION.BOTTOM_RIGHT
       })
-    }).catch((_) => {})
+    })
+    .catch((_) => {})
 }
 
 function updateEntity() {
@@ -123,21 +124,22 @@ function handleData(data: Company) {
 }
 
 async function updateToCompany() {
-  const updatedFields: Company = {};
+  const updatedFields: Company = {}
 
   Object.entries(payload.value).forEach(([key, value]) => {
-    if (value !== "") {
-      updatedFields[key] = value;
+    if (value !== '') {
+      updatedFields[key] = value
     }
-  });
+  })
 
   if (Object.keys(updatedFields).length > 0) {
     await updateCompany(user.id, updatedFields)
       .then(({ message }: any) => {
         toast.success(message, {
           position: toast.POSITION.BOTTOM_RIGHT
-        });
-      }).catch((_) => {});
+        })
+      })
+      .catch((_) => {})
   } else {
     toast.warning('Nenhum campo para atualizar', {
       position: toast.POSITION.BOTTOM_RIGHT
@@ -145,12 +147,14 @@ async function updateToCompany() {
   }
 }
 
-
-
-watch(useStore, (newValue) => {
-  company.value = newValue.userData
-  updateEntity()
-}, { deep: true})
+watch(
+  useStore,
+  (newValue) => {
+    company.value = newValue.userData
+    updateEntity()
+  },
+  { deep: true }
+)
 </script>
 <style scoped>
 .content-top {
@@ -195,10 +199,9 @@ watch(useStore, (newValue) => {
   opacity: 0.5;
   pointer-events: none;
 }
-.company 
-.name, 
-.owner, 
-.email, 
+.company .name,
+.owner,
+.email,
 .password {
   width: 100%;
 }

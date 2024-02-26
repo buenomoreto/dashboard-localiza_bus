@@ -27,7 +27,6 @@ api.interceptors.request.use(
   }
 )
 
-
 api.interceptors.response.use(
   (response: AxiosResponse) => {
     return response.data
@@ -58,13 +57,13 @@ api.interceptors.response.use(
         }
       }
     }
-   
+
     error.response.data.message.forEach(({ msg }: any) => {
       toast.error(msg, {
         position: toast.POSITION.BOTTOM_LEFT
       })
     })
-  
+
     return Promise.reject(error)
   }
 )

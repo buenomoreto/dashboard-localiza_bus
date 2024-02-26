@@ -3,25 +3,26 @@
     <div class="modal-mask">
       <div class="modal-wrapper">
         <div class="modal-container">
-  
           <div class="modal-header">
-            <slot name="header">
-              default header
-            </slot>
+            <slot name="header"> default header </slot>
           </div>
-  
+
           <div class="modal-body">
-            <slot name="body">
-              default body
-            </slot>
+            <slot name="body"> default body </slot>
           </div>
-  
+
           <div class="modal-footer">
             <slot name="footer">
-              <button class="modal-default-button--cancel" @click="$emit('cancel')">
+              <button
+                class="modal-default-button--cancel"
+                @click="$emit('cancel')"
+              >
                 cancelar
               </button>
-              <button class="modal-default-button--delete" @click="$emit('close')">
+              <button
+                class="modal-default-button--delete"
+                @click="$emit('close')"
+              >
                 OK
               </button>
             </slot>
@@ -32,9 +33,7 @@
   </transition>
 </template>
 
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <style scoped>
 .modal-mask {

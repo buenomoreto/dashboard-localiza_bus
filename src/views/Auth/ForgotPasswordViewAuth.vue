@@ -4,7 +4,8 @@
       <div class="container__form--center">
         <h1 class="container__form-title title">Esqueci minha senha</h1>
         <p class="container__form-text">
-          Digite seu endereço de e-mail para receber as instruções necessárias e criar uma nova senha.
+          Digite seu endereço de e-mail para receber as instruções necessárias e
+          criar uma nova senha.
         </p>
         <form action="">
           <CommonInput
@@ -81,11 +82,11 @@ function handleLogin() {
 </script>
 <style scoped>
 .container__form-text {
-  color: #393E46;
+  color: #393e46;
   font-size: 14px;
   font-weight: 400;
   margin-bottom: 20px;
-  line-height: 166.667% ; 
+  line-height: 166.667%;
 }
 .container__form-title {
   margin-bottom: 5px;

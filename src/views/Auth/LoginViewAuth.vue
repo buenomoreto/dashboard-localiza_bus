@@ -13,14 +13,14 @@
             entryType="email"
             placeholder="Digite o seu e-mail"
           />
-            
+
           <CommonInput
             @change="handleInput"
             type="password"
             entryType="password"
             placeholder="Digite a sua senha"
           />
-            
+
           <div class="container__form-checkbox">
             <CommonCheckbox :checked="checked">
               <template #label>
@@ -95,11 +95,9 @@ async function handleLogin() {
       loading.value = false
     })
 }
-
 </script>
 
 <style scoped>
-
 .container__form-checkbox {
   display: flex;
   justify-content: space-between;
@@ -108,7 +106,7 @@ async function handleLogin() {
   width: 100%;
 }
 .container__form-link {
-  color: #2BB673;
+  color: #2bb673;
   font-size: 14px;
   display: flex;
   text-decoration: underline;
@@ -134,5 +132,4 @@ async function handleLogin() {
 .container__form-checkbox .common__checkbox {
   width: 100%;
 }
-
 </style>

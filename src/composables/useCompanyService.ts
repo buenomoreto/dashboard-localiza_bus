@@ -3,7 +3,6 @@ import { api } from '@/config/axios'
 import router from '@/router'
 
 export default function useCompanyService() {
-  
   const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
   const createCompany = async (payload: Company) => {
@@ -12,16 +11,15 @@ export default function useCompanyService() {
   }
 
   const getCompany = async (id: number) => {
-    let response;
+    let response
     if (!user) {
-      localStorage.removeItem('userLogged');
-      router.push({ name: 'Login' });
+      localStorage.removeItem('userLogged')
+      router.push({ name: 'Login' })
     } else {
-      response = await api.get(`/admin/company/${id}`);
+      response = await api.get(`/admin/company/${id}`)
     }
-    return response;
+    return response
   }
-  
 
   const getAllCompany = async () => {
     const response = await api.get('/admin/company')

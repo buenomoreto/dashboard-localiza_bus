@@ -29,13 +29,14 @@ const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 const fetchUser = async () => {
   if (!user) {
-    localStorage.removeItem('userLogged');
-    router.push({ name: 'Login' });
+    localStorage.removeItem('userLogged')
+    router.push({ name: 'Login' })
   } else {
     await getCompany(user.id)
       .then(({ data }: any) => {
         useStore.setUser(data)
-      }).catch((_) => {
+      })
+      .catch((_) => {
         router.push({ name: 'Login' })
       })
   }
@@ -68,4 +69,5 @@ fetchUser()
   display: flex;
   flex-direction: column;
   align-items: center;
-}</style>
+}
+</style>

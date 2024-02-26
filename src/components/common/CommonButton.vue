@@ -27,7 +27,7 @@ function handleClick(event: Event) {
 }
 .common__button__inner {
   color: #fff;
-  background: #2BB673;
+  background: #2bb673;
   font-size: 14px;
   min-height: 50px;
   border-radius: 25px;

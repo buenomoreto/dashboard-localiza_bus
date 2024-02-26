@@ -1,11 +1,6 @@
 <template>
   <div class="user-photo">
-    <img
-      v-if="photoURL"
-      :src="photoURL"
-      width="82"
-      height="82"
-    />
+    <img v-if="photoURL" :src="photoURL" width="82" height="82" />
     <img
       v-else
       src="@/assets/images/default-profile.png"
@@ -35,7 +30,7 @@
 import { ref } from 'vue'
 
 const emit = defineEmits(['file'])
-const props = defineProps<{ photo?: string, owner?: string }>()
+const props = defineProps<{ photo?: string; owner?: string }>()
 const fileInput = ref<HTMLInputElement | null>(null)
 const photoURL = ref<any>(props.photo)
 

@@ -1,11 +1,11 @@
 <template>
   <form>
-    <div 
-      class="content-form" 
-      :class="[entity.name]" 
-      v-for="(entity, index) in entities" 
+    <div
+      class="content-form"
+      :class="[entity.name]"
+      v-for="(entity, index) in entities"
       :key="entity.name"
-      >
+    >
       <template v-if="entity.active">
         <div
           class="content"
@@ -19,7 +19,12 @@
           <template v-if="field.type !== 'checkbox'">
             <CommonInput
               @change="handlePayload"
-              v-if="!field.regex && !['ticket_price', 'color', 'hours', 'map'].includes(field.entryType)"
+              v-if="
+                !field.regex &&
+                !['ticket_price', 'color', 'hours', 'map'].includes(
+                  field.entryType
+                )
+              "
               :type="field.type"
               :placeholder="field.placeholder"
               :entryType="field.entryType"
@@ -57,7 +62,7 @@
               :entryType="field.entryType"
               :value="field.value"
             />
-            <CommonMap 
+            <CommonMap
               @change="handlePayload"
               v-if="field.entryType == 'map'"
             />
@@ -94,8 +99,8 @@ import CommonMap from './common/CommonMap.vue'
 
 type AllEntities = Bus & Driver & Line & Point & Company
 
-const props = defineProps<{entities: any[]}>()
-const emit  = defineEmits(['data'])
+const props = defineProps<{ entities: any[] }>()
+const emit = defineEmits(['data'])
 const payload = ref()
 
 const entityPayload: any = reactive({
@@ -137,26 +142,25 @@ const entityPayload: any = reactive({
     phone_number: '',
     owner: '',
     password: '',
-    user_photo: '',
+    user_photo: ''
   }
 })
 
 function updatePayload() {
   const activeEntity = props.entities.find((entity) => entity.active)
   if (activeEntity && entityPayload[activeEntity.name]) {
-    payload.value = entityPayload[activeEntity.name] 
+    payload.value = entityPayload[activeEntity.name]
   }
   emit('data', payload.value)
 }
 
-updatePayload();
+updatePayload()
 
 watch(props.entities, updatePayload, { deep: true })
 
 function handlePayload(field: keyof AllEntities, value: string) {
   payload.value[field] = value
 }
-
 </script>
 
 <style scoped>
@@ -166,7 +170,7 @@ function handlePayload(field: keyof AllEntities, value: string) {
   gap: 15px;
   max-width: 585px;
 }
-.bus, 
+.bus,
 .driver {
   flex-direction: column;
   flex-wrap: wrap;
@@ -190,23 +194,24 @@ function handlePayload(field: keyof AllEntities, value: string) {
 label {
   color: #000;
 }
-.postal_code .common__input, 
-.neighborhood .common__input, 
-.city .common__input { 
+.postal_code .common__input,
+.neighborhood .common__input,
+.city .common__input {
   width: 285px;
 }
 .state .common__input {
   width: 140px;
 }
-.postal_code, 
-.neighborhood, 
-.city { 
+.postal_code,
+.neighborhood,
+.city {
   width: 285px;
 }
 .state {
   width: 140px;
 }
-.point .name, .reference {
+.point .name,
+.reference {
   width: 100%;
 }
 .user_photo {
@@ -214,7 +219,8 @@ label {
 }
 </style>
 <style>
-.line .common__input, .line .color-picker-container{
+.line .common__input,
+.line .color-picker-container {
   width: 285px;
 }
 .hours .common__input {
