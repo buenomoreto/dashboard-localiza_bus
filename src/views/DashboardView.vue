@@ -90,6 +90,7 @@ const driverData = ref([])
 const pointData = ref([])
 const historyData = ref([])
 const selectedDate = ref(formatDate(currentDate))
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 function formatDate(date: Date) {
   return moment(date).format('D [de] MMMM [de] YYYY')
@@ -98,7 +99,7 @@ function formatDate(date: Date) {
 const handleDate = async (date: any) => {
   try {
     selectedDate.value = formatDate(date.id)
-    historyData.value = await getAllHistory(undefined, date.id, 8, 0)
+    historyData.value = await getAllHistory(user.id, date.id, 8, 0)
   } catch (_) {
   } finally { 
     loading.value = false
@@ -108,10 +109,10 @@ const handleDate = async (date: any) => {
 const fetchData = async () => {
   try {
     const [bus, driver, point, history] = await Promise.all([
-      getAllBus(undefined),
-      getAllDriver(undefined),
-      getAllPoint(undefined),
-      getAllHistory(undefined, currentDate.toISOString().split('T')[0], 30, 0)
+      getAllBus(user.id),
+      getAllDriver(user.id),
+      getAllPoint(user.id),
+      getAllHistory(user.id, currentDate.toISOString().split('T')[0], 30, 0)
     ])
 
     busData.value = bus

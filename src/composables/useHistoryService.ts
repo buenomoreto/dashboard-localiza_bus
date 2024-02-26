@@ -1,10 +1,9 @@
 import { api } from '@/config/axios'
 import { History } from '@/ts/interfaces/history'
-const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 export default function useHistoryService() {
   const getAllHistory = async (
-    companyId = user.id,
+    companyId: number,
     startDate: string,
     limit: number,
     offset: number

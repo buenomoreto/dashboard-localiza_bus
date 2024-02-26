@@ -2,7 +2,7 @@
   <LayoutDashboard>
     <template #content>
       <div class="content-top" v-if="company">
-        <UploadFile v-if="company.user_photo" :photo="company.user_photo" :owner="company.owner" @file="handleFileUpload" />
+        <UploadFile :photo="company.user_photo" :owner="company.owner" @file="handleFileUpload" />
         <div class="user-name">
           {{ company.name }}
           <div class="user-verified">
@@ -47,10 +47,11 @@ const { updateCompany, uploadFile } = useCompanyService()
 const payload = ref({} as Company)
 const company = ref()
 const entity = ref([{}])
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 const handleFileUpload = async (file: any) => {
   
-  uploadFile(undefined, file)
+  uploadFile(user.id, file)
     .then(({ message }: any) => {
       toast.success(message, {
         position: toast.POSITION.BOTTOM_RIGHT
@@ -131,14 +132,14 @@ async function updateToCompany() {
   });
 
   if (Object.keys(updatedFields).length > 0) {
-    await updateCompany(undefined, updatedFields)
+    await updateCompany(user.id, updatedFields)
       .then(({ message }: any) => {
         toast.success(message, {
           position: toast.POSITION.BOTTOM_RIGHT
         });
       }).catch((_) => {});
   } else {
-    toast.error('Nenhum campo para atualizar', {
+    toast.warning('Nenhum campo para atualizar', {
       position: toast.POSITION.BOTTOM_RIGHT
     })
   }

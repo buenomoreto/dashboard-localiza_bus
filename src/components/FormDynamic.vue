@@ -4,7 +4,7 @@
       class="content-form" 
       :class="[entity.name]" 
       v-for="(entity, index) in entities" 
-      :key="index"
+      :key="entity.name"
       >
       <template v-if="entity.active">
         <div
@@ -19,12 +19,7 @@
           <template v-if="field.type !== 'checkbox'">
             <CommonInput
               @change="handlePayload"
-              v-if="!field.regex && 
-                field.entryType !== 'ticket_price' &&
-                field.entryType !== 'color' &&
-                field.entryType !== 'hours' &&
-                field.entryType !== 'map'
-              "
+              v-if="!field.regex && !['ticket_price', 'color', 'hours', 'map'].includes(field.entryType)"
               :type="field.type"
               :placeholder="field.placeholder"
               :entryType="field.entryType"
@@ -113,6 +108,7 @@ const entityPayload: any = reactive({
     operational_status: false
   },
   driver: {
+    user_photo: '',
     name: '',
     email: '',
     cpf: '',
@@ -160,6 +156,7 @@ watch(props.entities, updatePayload, { deep: true })
 function handlePayload(field: keyof AllEntities, value: string) {
   payload.value[field] = value
 }
+
 </script>
 
 <style scoped>
@@ -212,7 +209,9 @@ label {
 .point .name, .reference {
   width: 100%;
 }
-
+.user_photo {
+  align-self: center;
+}
 </style>
 <style>
 .line .common__input, .line .color-picker-container{

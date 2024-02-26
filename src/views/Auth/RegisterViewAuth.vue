@@ -20,7 +20,7 @@
                 <img src="@/assets/images/icons/company.svg" alt="" />
               </template>
             </CommonInput>
-            <CommonInput
+            <CommonInputRegex
               @change="handleInput"
               type="text"
               entryType="cnpj"
@@ -29,10 +29,10 @@
               <template #icon>
                 <img src="@/assets/images/icons/cnpj.svg" alt="" />
               </template>
-            </CommonInput>
+            </CommonInputRegex>
           </div>
           <div class="container__form--flex">
-            <CommonInput
+            <CommonInputRegex
               @change="handleInput"
               type="text"
               entryType="phone_number"
@@ -41,7 +41,7 @@
               <template #icon>
                 <img src="@/assets/images/icons/tel.svg" alt="" />
               </template>
-            </CommonInput>
+            </CommonInputRegex>
             <CommonInput
               @change="handleInput"
               type="text"
@@ -99,6 +99,7 @@
 </template>
 
 <script setup lang="ts">
+import CommonInputRegex from '@/components/common/CommonInputRegex.vue'
 import CommonInput from '@/components/common/CommonInput.vue'
 import CommonButton from '@/components/common/CommonButton.vue'
 import CommonCheckbox from '@/components/common/CommonCheckbox.vue'

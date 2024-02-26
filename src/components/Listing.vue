@@ -88,14 +88,14 @@ import { translates } from '@/mock/translates';
 
 const router = useRouter()
 const { id, routeName, item } = defineProps<{ id: number; routeName: string, item: any }>()
-console.log(item);
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 const { destroy } = useDynamicService()
 const showModal = ref(false);
 
 function handleDelete() {
   showModal.value = false
 
-  destroy(undefined, id, routeName)
+  destroy(user.id, id, routeName)
     .then((response) => {
       toast.success(response.message, {
         position: toast.POSITION.BOTTOM_RIGHT

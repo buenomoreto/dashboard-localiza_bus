@@ -17,7 +17,7 @@ const { type, placeholder, entryType, value } = defineProps<{
   type: string
   placeholder: string
   entryType: string
-  value: string
+  value?: string
 }>()
 const getValue = value
 const regexPatterns: Record<string, string> = {

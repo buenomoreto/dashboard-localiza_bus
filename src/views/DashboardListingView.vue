@@ -28,12 +28,7 @@
             :item="item"
           >
             <template #image>
-              <img
-                v-if="item.user_photo"
-                :src="item.user_photo"
-                alt="Foto do usuário"
-              />
-              <div v-else class="icon-bus" :style="{ background: item.line ? item.line.color+26 : '#393e46'}" >
+              <div class="icon-bus" :style="{ background: item.line ? item.line.color+26 : '#2BB673'}" >
                 <svg
                   width="20"
                   height="20"
@@ -91,13 +86,14 @@ const route = useRoute()
 const listing = ref()
 const name = ref(extractName(route.path))
 const hasListings = computed(() => listing.value && listing.value.length > 0)
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 function extractName(path: string): string {
   return path.replace('/', '')
 }
 
 async function fetchData() {
-  listing.value = await getAll(undefined, name.value)
+  listing.value = await getAll(user.id, name.value)
 }
 
 
@@ -107,6 +103,9 @@ watch(() => route.path, (newPath) => {
 })
 
 fetchData()
+
+console.log('entrou');
+
 </script>
 <style scoped>
 .content-top {

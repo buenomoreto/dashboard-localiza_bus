@@ -3,8 +3,8 @@ import { api } from '@/config/axios'
 import { useRouter } from 'vue-router'
 import { toast } from 'vue3-toastify'
 
+const router = useRouter()
 export default function useUserService() {
-  const router = useRouter()
 
   const signIn = async (user: UserCredentials) => {
     const response = await api.post('/user/signIn', user)

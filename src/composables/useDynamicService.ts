@@ -3,11 +3,10 @@ import { Bus } from '@/ts/interfaces/bus'
 import { Driver } from '@/ts/interfaces/driver'
 import { Line } from '@/ts/interfaces/line'
 import { Point } from '@/ts/interfaces/point'
-const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 export default function useDynamicService() {
   const getAll = async (
-    companyId = user.id,
+    companyId: number,
     name: string,
     recent?: boolean,
     limit?: number,
@@ -34,7 +33,7 @@ export default function useDynamicService() {
   }
 
   const create = async (
-    companyId = user.id,
+    companyId: number,
     name: string,
     payload: Bus | Driver | Line | Point,
     id?: number,
@@ -49,14 +48,14 @@ export default function useDynamicService() {
     if (entity != null && entity != 'bus') {
       url += `/${entity}`;
     }
-  
+    
     const response = await api.post(url, payload);
     return response;
   };
   
 
   const destroy = async (
-    companyId = user.id,
+    companyId: number,
     id: number,
     name: string
   ): Promise<any> => {

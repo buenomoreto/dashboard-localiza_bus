@@ -75,11 +75,9 @@
               :item="item"
             >
               <template #image>
-                <img
-                  v-if="item.user_photo"
-                  :src="item.user_photo"
-                  alt="Foto do usuário"
-                />
+                <div v-if="entity.name == 'driver'" class="icon-point">
+                  <img width="20" height="20"  src="@/assets/images/icons/driver-listing.svg" alt="">
+                </div>
                 <div v-if="entity.name == 'line' && item.color" class="icon-line" :style="{background: item.color+26}" >
                   <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.554686 0.0391235C0.382811 0.0899048 0.183593 0.261778 0.0859372 0.441465L0 0.605528V10V19.3945L0.0859372 19.5586C0.183593 19.7422 0.36328 19.8867 0.562498 19.957C0.636717 19.9805 0.941403 20 1.2539 20H1.8164V10V6.10352e-05L1.24218 0.00396729C0.921872 0.00396729 0.613279 0.0234985 0.554686 0.0391235Z" 
@@ -158,6 +156,7 @@ const id_bus = ref()
 const listing = ref()
 const toggle = ref(true)
 const name = ref(extractName(route.path))
+const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 let payload = reactive({} as Bus | Driver | Line | Point)
 
@@ -340,7 +339,7 @@ function extractName(path: string): string {
 
 async function fetchData(name: string) {
   if(name != 'bus') {
-    listing.value = await getAll(undefined, name)
+    listing.value = await getAll(user.id, name)
   }
 }
 
@@ -369,7 +368,7 @@ if (route.params.id && route.params.id.length) {
 function handleCreation() {
   if (useValidateFields(payload.value, "bottom-right")) return
 
-  create(undefined, 'bus', payload.value, id_bus.value, name.value)
+  create(user.id, 'bus', payload.value, id_bus.value, name.value)
     .then((response) => {
       if(name.value == 'bus') {
         id_bus.value = response.data.id 

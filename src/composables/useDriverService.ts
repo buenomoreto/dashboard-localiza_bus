@@ -1,10 +1,9 @@
 import { api } from '@/config/axios'
 import { Driver } from '@/ts/interfaces/driver'
-const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 export default function useDriverService() {
   const createDriver = async (
-    companyId = user.id,
+    companyId: number,
     busId: number,
     payload: Driver
   ) => {
@@ -15,20 +14,20 @@ export default function useDriverService() {
     return response
   }
 
-  const getDriver = async (companyId = user.id, driverId: number) => {
+  const getDriver = async (companyId: number, driverId: number) => {
     const response = await api.get(
       `/admin/company/${companyId}/driver/${driverId}`
     )
     return response
   }
 
-  const getAllDriver = async (companyId = user.id) => {
+  const getAllDriver = async (companyId: number) => {
     const response = await api.get(`/admin/company/${companyId}/driver`)
     return response.data
   }
 
   const updateDriver = async (
-    companyId = user.id,
+    companyId: number,
     busId: number,
     driverId: number,
     payload: Driver
@@ -41,7 +40,7 @@ export default function useDriverService() {
   }
 
   const uploadFile = async (
-    companyId = user.id,
+    companyId: number,
     driverId: number,
     upload: FormData
   ) => {
@@ -52,7 +51,7 @@ export default function useDriverService() {
     return response.data
   }
 
-  const deleteDriver = async (companyId = user.id, driverId: number) => {
+  const deleteDriver = async (companyId: number, driverId: number) => {
     const response = await api.delete(
       `/admin/company/${companyId}/driver/${driverId}`
     )

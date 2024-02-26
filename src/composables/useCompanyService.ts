@@ -1,15 +1,17 @@
 import { Company } from '@/ts/interfaces/company'
 import { api } from '@/config/axios'
 import router from '@/router'
-const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
 
 export default function useCompanyService() {
+  
+  const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
+
   const createCompany = async (payload: Company) => {
     const response = await api.post('/company/', payload)
     return response
   }
 
-  const getCompany = async (id = user.id) => {
+  const getCompany = async (id: number) => {
     let response;
     if (!user) {
       localStorage.removeItem('userLogged');
@@ -26,17 +28,17 @@ export default function useCompanyService() {
     return response.data
   }
 
-  const updateCompany = async (id = user.id, payload: Company) => {
+  const updateCompany = async (id: number, payload: Company) => {
     const response = await api.put(`/admin/company/${id}`, payload)
     return response
   }
 
-  const uploadFile = async (id = user.id, upload: FormData) => {
+  const uploadFile = async (id: number, upload: FormData) => {
     const response = await api.post(`/admin/company/${id}/upload`, upload)
     return response
   }
 
-  const deleteCompany = async (id = user.id) => {
+  const deleteCompany = async (id: number) => {
     const response = await api.delete(`/admin/company/${id}`)
     return response
   }
