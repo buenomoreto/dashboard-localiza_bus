@@ -28,9 +28,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watchEffect } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { computed } from 'vue'
 
+const emit = defineEmits(['pageChange']);
 const props = defineProps({
   totalItems: {
     type: Number,
@@ -39,23 +39,16 @@ const props = defineProps({
   itemsPerPage: {
     type: Number,
     default: 15
+  },
+  currentPage: {
+    type: Number,
+    required: true
   }
 })
 
-const route = useRoute()
-const router = useRouter()
-
-const currentPage = ref(parseInt(route.query.page as string) || 1)
 const totalPages = computed(() =>
   Math.ceil(props.totalItems / props.itemsPerPage)
 )
-
-watchEffect(() => {
-  const page = parseInt(route.query.page as string)
-  if (!isNaN(page) && page >= 1 && page <= totalPages.value) {
-    currentPage.value = page
-  }
-})
 
 const displayedPages = computed(() => {
   const pages: number[] = []
@@ -66,15 +59,13 @@ const displayedPages = computed(() => {
 })
 
 function goToPage(page: number) {
-  router.push({
-    query: { ...router.currentRoute.value.query, page: page.toString() }
-  })
+  emit('pageChange', page)
 }
 
 function getPageClass(page: number) {
   return {
     pagination__button: true,
-    'pagination__button--active': currentPage.value == page
+    'pagination__button--active': props.currentPage === page
   }
 }
 </script>

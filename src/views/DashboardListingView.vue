@@ -72,20 +72,22 @@
           </Listing>
         </template>
       </div>
-      <div class="content-pagination" v-if="listing?.total_count">
-        <Pagination :totalItems="listing.total_count" />
+      <div class="content-pagination" v-if="listing?.total_count > 15">
+        <Pagination
+          :totalItems="listing.total_count"
+          :currentPage="currentPage"
+          @pageChange="handlePageChange"
+        />
       </div>
     </template>
   </LayoutDashboard>
 </template>
 <script setup lang="ts">
-import { ref, watch, computed } from 'vue'
+import { ref, computed, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { translates } from '@/mock/translates'
 import Listing from '@/components/Listing.vue'
-import Breadcrumb from '@/components/base/BaseBreadcrumb.vue'
 import Pagination from '@/components/common/CommonPagination.vue'
-import Select from '@/components/common/CommonSelect.vue'
 import LayoutDashboard from '@/components/layout/LayoutDashboard.vue'
 import useDynamicService from '@/composables/useDynamicService'
 
@@ -93,6 +95,7 @@ const { getAll } = useDynamicService()
 const route = useRoute()
 
 const listing = ref()
+const currentPage = ref(1) 
 const name = ref(extractName(route.path))
 const hasListings = computed(() => listing.value && listing.value.length > 0)
 const user = JSON.parse(localStorage.getItem('userLogged') || 'null')
@@ -102,20 +105,19 @@ function extractName(path: string): string {
 }
 
 async function fetchData() {
-  listing.value = await getAll(user.id, name.value)
+  listing.value = await getAll(user.id, name.value, undefined, 15, (currentPage.value - 1) * 15)
 }
 
-watch(
-  () => route.path,
-  (newPath) => {
-    name.value = extractName(newPath)
-    fetchData()
-  }
-)
+watchEffect(() => {
+  name.value = extractName(route.path)
+  fetchData()
+})
+
+async function handlePageChange(page: number) {
+  currentPage.value = page
+}
 
 fetchData()
-
-console.log('entrou')
 </script>
 <style scoped>
 .content-top {
