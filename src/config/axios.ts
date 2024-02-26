@@ -58,12 +58,17 @@ api.interceptors.response.use(
       }
     }
 
-    error.response.data.message.forEach(({ msg }: any) => {
-      toast.error(msg, {
-        position: toast.POSITION.BOTTOM_LEFT
+    if (typeof error.response.data.message === 'string') {
+      toast.error(error.response.data.message, {
+        position: toast.POSITION.BOTTOM_RIGHT
       })
-    })
-
+    } else {
+      error.response.data.message.forEach(({ msg }: any) => {
+        toast.error(msg, {
+          position: toast.POSITION.BOTTOM_RIGHT
+        })
+      })
+    } 
     return Promise.reject(error)
   }
 )

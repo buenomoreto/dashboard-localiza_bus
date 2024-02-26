@@ -113,7 +113,6 @@ const entityPayload: any = reactive({
     operational_status: false
   },
   driver: {
-    user_photo: '',
     name: '',
     email: '',
     cpf: '',
